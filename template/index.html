@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MES College Student Resource Hub</title>
+  <link rel="stylesheet" href="/static/css/index.css">
+  <script src="education-script.js" defer></script>
+</head>
+<body>
+  <!-- Floating Background Shapes -->
+  <div class="floating-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+
+  <header>MES COLLEGE STUDENT RESOURCE HUB</header>
+  
+  <!-- Mobile Menu Toggle -->
+  <div class="menu-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <nav class="nav-menu">
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('about') }}">About</a>
+    <a href="{{ url_for('programs') }}">Programs</a>
+    <a href="{{ url_for('admissions') }}">Admissions</a>
+    <a href="{{ url_for('resources') }}">Resources</a>
+    <a href="{{ url_for('contact') }}">Contact</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Empowering Future Leaders</h1>
+      <p class="hero-subtitle">Join our vibrant community of learners and innovators. Discover world-class education with cutting-edge resources and exceptional faculty.</p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary">Explore Programs</button>
+        <button class="btn btn-secondary">Take a Virtual Tour</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Announcements -->
+  <section class="latest-announcements">
+    <h2>Latest Announcements</h2>
+    <p>Stay updated with the latest news and events happening at our institution.</p>
+    
+    <div class="announcements-container">
+      <div class="announcement-card">
+        <div class="announcement-date">February 20, 2025</div>
+        <h3 class="announcement-title">Spring Break Schedule Updates</h3>
+        <p class="announcement-content">Important updates regarding the schedule for the upcoming spring break. Please check your academic calendar.</p>
+        <a href="#" class="announcement-link">Read More →</a>
+      </div>
+      
+      <div class="announcement-card">
+        <div class="announcement-date">February 15, 2025</div>
+        <h3 class="announcement-title">Research Symposium 2025</h3>
+        <p class="announcement-content">Join us for the annual research symposium showcasing innovative projects from students and faculty members.</p>
+        <a href="#" class="announcement-link">Read More →</a>
+      </div>
+      
+      <div class="announcement-card">
+        <div class="announcement-date">February 10, 2025</div>
+        <h3 class="announcement-title">New Science Lab Inauguration</h3>
+        <p class="announcement-content">The new state-of-the-art science laboratory will be inaugurated next week. All students are invited to attend.</p>
+        <a href="#" class="announcement-link">Read More →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3D Image Slider -->
+  <div class="slider">
+    <div class="slides">
+      <div class="slide">
+        <img src="/static/images/college1.jpg" alt="College Campus">
+        <div class="slide-content">
+          <h3 class="slide-title">Modern Campus Facilities</h3>
+          <p class="slide-desc">Our campus features state-of-the-art facilities designed to enhance your learning experience.</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="/static/images/college2.jpg" alt="College Library">
+        <div class="slide-content">
+          <h3 class="slide-title">Extensive Research Library</h3>
+          <p class="slide-desc">Access thousands of resources in our well-equipped library.</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="/static/images/college3.jpg" alt="College Students">
+        <div class="slide-content">
+          <h3 class="slide-title">Diverse Student Community</h3>
+          <p class="slide-desc">Join a vibrant community of students from around the world.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slider-nav">
+      <div class="slider-dot active"></div>
+      <div class="slider-dot"></div>
+      <div class="slider-dot"></div>
+    </div>
+  </div>
+
+  <!-- Login Section -->
+  <section class="login-section">
+    <div class="login-card">
+      <div class="login-icon">👨‍💼</div>
+      <h2>Admin Login</h2>
+      <p>Access the administrative portal to manage institution resources and data.</p>
+      <a href="{{ url_for('admin_login') }}">Login</a>
+    </div>
+    
+    <div class="login-card">
+      <div class="login-icon">👨‍🏫</div>
+      <h2>Teacher Login</h2>
+      <p>Access your teaching portal to manage classes, resources, and student information.</p>
+      <a href="{{ url_for('teacher_login') }}">Login</a>
+    </div>
+    
+    <div class="login-card">
+      <div class="login-icon">👨‍🎓</div>
+      <h2>Student Login</h2>
+      <p>Access your student portal to view courses, grades, and learning resources.</p>
+      <a href="{{ url_for('student_login') }}">Login</a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <h2 class="section-title">Why Choose Us</h2>
+    <div class="features-container">
+      <div class="feature-card">
+        <div class="feature-icon">🎓</div>
+        <h3 class="feature-title">World-Class Faculty</h3>
+        <p class="feature-desc">Learn from industry experts and renowned academics who are dedicated to your success.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🔬</div>
+        <h3 class="feature-title">Research Opportunities</h3>
+        <p class="feature-desc">Engage in cutting-edge research with access to state-of-the-art facilities.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🌎</div>
+        <h3 class="feature-title">Global Partnerships</h3>
+        <p class="feature-desc">Benefit from our collaborations with leading institutions worldwide.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">💼</div>
+        <h3 class="feature-title">Career Services</h3>
+        <p class="feature-desc">Get personalized career guidance and industry connections for future success.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stats-container">
+      <div class="stat-item">
+        <div class="stat-number">20k+</div>
+        <div class="stat-title">Students</div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-number">500+</div>
+        <div class="stat-title">Faculty Members</div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-number">98%</div>
+        <div class="stat-title">Placement Rate</div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-number">120+</div>
+        <div class="stat-title">Programs</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">MES COLLEGE</div>
+        <p>Empowering students with knowledge, skills, and values for a successful future.</p>
+        <div class="social-icons">
+          <a href="#" class="social-icon">🔵</a>
+          <a href="#" class="social-icon">🐦</a>
+          <a href="#" class="social-icon">📷</a>
+          <a href="#" class="social-icon">🔴</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Programs</a></li>
+          <li><a href="#">Admissions</a></li>
+          <li><a href="#">Resources</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3 class="footer-title">Contact Us</h3>
+        <div class="contact-info">
+          <span class="contact-icon">📍</span>
+          <span>123 Education Blvd, University City</span>
+        </div>
+        <div class="contact-info">
+          <span class="contact-icon">📞</span>
+          <span>+1 234 567 8900</span>
+        </div>
+        <div class="contact-info">
+          <span class="contact-icon">✉️</span>
+          <span>info@mescollege.edu</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      &copy; 2025 MES College | All Rights Reserved
+    </div>
+  </footer>
+</body>
+</html>

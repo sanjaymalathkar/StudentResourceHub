@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCA Student Resource Hub</title>
+    <link rel="stylesheet" href="../static/css/bca.css">
+    <script src="/js/chat.js" defer></script>
+</head>
+<body>
+    <header>BCA Student Resource Hub</header>
+    
+    <nav class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    
+    <div class="selection-container">
+        <h2>Select Year & Subject</h2>
+        <div class="input-group">
+            <label for="year">Choose Year:</label>
+            <select id="year">
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+            </select>
+        </div>
+        
+        <div class="input-group">
+            <label for="subject">Choose Subject:</label>
+            <select id="subject">
+                <option value="programming">Programming</option>
+                <option value="databases">Databases</option>
+                <option value="networking">Networking</option>
+            </select>
+        </div>
+        
+        <div class="input-group">
+            <label for="module">Select Module:</label>
+            <select id="module">
+                <option value="1">Module 1</option>
+                <option value="2">Module 2</option>
+                <option value="3">Module 3</option>
+            </select>
+        </div>
+        
+        <button class="submit-btn">View Resources</button>
+    </div>
+    
+    <div class="chat-container">
+        <h2>Live Chat</h2>
+        <div class="chat-box" id="chat-box"></div>
+        <input type="text" id="chat-input" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    
+    <footer>
+        &copy; 2025 MES Institution | All Rights Reserved
+        <div class="social-icons">
+            <a href="#">🔵</a>
+            <a href="#">🐦</a>
+            <a href="#">📷</a>
+        </div>
+    </footer>
+</body>
+</html>

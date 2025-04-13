@@ -1,0 +1,92 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    background: white;
+    padding: 20px;
+    max-width: 600px;
+    width: 90%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Headings */
+h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    color: #444;
+    font-size: 20px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    margin-top: 20px;
+}
+
+/* Course and Year Info */
+p {
+    font-size: 16px;
+    color: #666;
+    margin: 5px 0;
+}
+
+strong {
+    color: #222;
+}
+
+/* Sections */
+section {
+    margin-top: 20px;
+    text-align: left;
+}
+
+/* Lists */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+li a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+li a:hover {
+    text-decoration: underline;
+}
+
+/* Icons */
+li::before {
+    content: "📄";
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+/* YouTube Section */
+#youtube-links li::before {
+    content: "▶";
+    color: red;
+}

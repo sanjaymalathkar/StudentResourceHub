@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="/static/css/about.css">
+    <link rel="stylesheet" href="/static/css/index.css"> <!-- Your existing CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Floating Background Shapes -->
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <h1>About Our Company</h1>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-menu">
+        <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('about') }}">About</a>
+    <a href="{{ url_for('programs') }}">Programs</a>
+    <a href="{{ url_for('admissions') }}">Admissions</a>
+    <a href="{{ url_for('resources') }}">Resources</a>
+    <a href="{{ url_for('contact') }}">Contact</a>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Our Story</h1>
+            <p class="hero-subtitle">Founded in 2010, we've been on a mission to create innovative solutions that transform businesses and improve lives.</p>
+        </div>
+    </section>
+
+    <!-- Our Mission Section -->
+    <section class="mission-section">
+        <div class="section-container">
+            <h2 class="section-title">Our Mission</h2>
+            <div class="mission-content">
+                <div class="mission-image">
+                    <img src="/api/placeholder/500/400" alt="Our Mission">
+                </div>
+                <div class="mission-text">
+                    <p>We strive to deliver exceptional products and services that exceed our clients' expectations. Our mission is to empower businesses through innovative technology solutions while maintaining the highest standards of quality and integrity.</p>
+                    <p>By combining creativity with technical expertise, we help our clients navigate the digital landscape and achieve their goals in an ever-evolving market.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values Section -->
+    <section class="values-section">
+        <h2 class="section-title">Our Core Values</h2>
+        <div class="values-container">
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3 class="value-title">Innovation</h3>
+                <p class="value-desc">We embrace change and continuously seek new ways to improve and innovate in everything we do.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="value-title">Collaboration</h3>
+                <p class="value-desc">We believe in the power of teamwork and foster an environment of open communication and mutual respect.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="value-title">Integrity</h3>
+                <p class="value-desc">We uphold the highest standards of honesty, transparency, and ethical conduct in all our interactions.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h3 class="value-title">Excellence</h3>
+                <p class="value-desc">We are committed to delivering exceptional quality and strive for excellence in every project we undertake.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <h2 class="section-title">Meet Our Team</h2>
+        <div class="team-container">
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="/api/placeholder/300/300" alt="Team Member">
+                </div>
+                <h3 class="member-name">John Doe</h3>
+                <p class="member-position">Founder & CEO</p>
+                <p class="member-bio">With over 15 years of industry experience, John leads our company with vision and passion.</p>
+                <div class="member-social">
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="/api/placeholder/300/300" alt="Team Member">
+                </div>
+                <h3 class="member-name">Jane Smith</h3>
+                <p class="member-position">Creative Director</p>
+                <p class="member-bio">Jane brings creativity and innovation to every project with her unique design perspective.</p>
+                <div class="member-social">
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="/api/placeholder/300/300" alt="Team Member">
+                </div>
+                <h3 class="member-name">Michael Johnson</h3>
+                <p class="member-position">Technical Lead</p>
+                <p class="member-bio">Michael's technical expertise and problem-solving skills drive our development process.</p>
+                <div class="member-social">
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <h2 class="section-title">Our Journey</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>2010</h3>
+                    <p>Founded the company with a small team of passionate innovators.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>2013</h3>
+                    <p>Expanded our services to include web development and mobile applications.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>2016</h3>
+                    <p>Opened our second office and grew to a team of 25 dedicated professionals.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>2019</h3>
+                    <p>Launched our innovative product line and secured major partnerships.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>2022</h3>
+                    <p>Celebrated our 12th anniversary with global recognition and expansion.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <h2 class="section-title">What Our Clients Say</h2>
+        <div class="testimonials-container">
+            <div class="testimonial">
+                <div class="testimonial-content">
+                    <p>"Working with this team has been an absolute pleasure. Their attention to detail and commitment to quality is unmatched in the industry."</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-image">
+                        <img src="/api/placeholder/80/80" alt="Client">
+                    </div>
+                    <div class="author-info">
+                        <h4>Sarah Williams</h4>
+                        <p>Marketing Director, XYZ Company</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-content">
+                    <p>"They don't just deliver projects; they provide solutions that truly address our business needs. Their strategic approach has been invaluable to our growth."</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-image">
+                        <img src="/api/placeholder/80/80" alt="Client">
+                    </div>
+                    <div class="author-info">
+                        <h4>Robert Chen</h4>
+                        <p>CEO, Tech Innovations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-info-box">
+                <h2>Get In Touch</h2>
+                <p>We'd love to hear from you. Reach out to discuss how we can help with your next project.</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>123 Business Street, Suite 100, City, Country</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <p>+1 (123) 456-7890</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>info@yourcompany.com</p>
+                    </div>
+                </div>
+                <div class="contact-button">
+                    <a href="#" class="btn btn-primary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">Your Company</div>
+        <p>Providing innovative solutions since 2010. We're dedicated to excellence and customer satisfaction.</p>
+        <div class="social-icons">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3 class="footer-title">Legal</h3>
+        <ul class="footer-links">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="cookies.html">Cookie Policy</a></li>
+          <li><a href="disclaimer.html">Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Your Company. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        
+        // Sticky Navigation
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav-menu');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

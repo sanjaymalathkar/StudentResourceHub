@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course }} - {{ year }} Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='course.css') }}">
+    <link rel="stylesheet" href="/static/css/course.css">
+</head>
+<body>
+    <header>
+        <h1>{{ course }} - {{ year }} Dashboard</h1>
+        <a href="{{ url_for('student_dashboard') }}" class="btn">🔙 Back to Course Selection</a>
+    </header>
+
+<!-- 📁 Uploaded Resources -->
+<section>
+    <h2>📁 Uploaded Resources</h2>
+    {% if resources %}
+        <ul>
+            {% for resource in resources %}
+                <li>
+                    <strong>{{ resource.filename }}</strong> — 
+                    Module: {{ resource.module }} — 
+                    Subject: {{ resource.subject }}
+                    <a href="{{ url_for('download_resource', resource_id=resource.file_id) }}" class="btn">⬇️ Download</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No resources uploaded yet.</p>
+    {% endif %}
+</section>
+
+<!-- 📝 Notes -->
+<section>
+    <h2>📝 Notes</h2>
+    {% if notes %}
+        <ul>
+            {% for note in notes %}
+                <li>
+                    <strong>{{ note.filename }}</strong> — 
+                    Module: {{ note.module }} — 
+                    Subject: {{ note.subject }}
+                    <a href="{{ url_for('download_resource', resource_id=note.file_id) }}" class="btn">📥 Download</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No notes uploaded yet.</p>
+    {% endif %}
+</section>
+
+<!-- 📜 Question Papers -->
+<section>
+    <h2>📜 Question Papers</h2>
+    {% if question_papers %}
+        <ul>
+            {% for paper in question_papers %}
+                <li>
+                    <strong>{{ paper.filename }}</strong> — 
+                    Module: {{ paper.module }} — 
+                    Subject: {{ paper.subject }}
+                    <a href="{{ url_for('download_resource', resource_id=paper.file_id) }}" class="btn">📄 Download</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No question papers available.</p>
+    {% endif %}
+</section>
+
+<!-- 🎥 YouTube Links -->
+<section>
+    <h2>🎥 YouTube References</h2>
+    {% if youtube_links %}
+        <ul>
+            {% for link in youtube_links %}
+                <li>
+                    <a href="{{ link.url }}" target="_blank">▶ {{ link.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No YouTube links available.</p>
+    {% endif %}
+</section>
+
+
+    <footer>
+        &copy; 2025 MES Institution | All Rights Reserved
+    </footer>
+</body>
+</html>

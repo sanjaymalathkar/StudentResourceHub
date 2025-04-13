@@ -1,0 +1,96 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Heading */
+h2 {
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+form {
+    background: #fff;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+    text-align: left;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 15px;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* Table Styling */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #007bff;
+    color: white;
+}
+
+tr:hover {
+    background: #f1f1f1;
+}
+
+/* Download Button */
+a {
+    text-decoration: none;
+    background: #28a745;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+a:hover {
+    background: #218838;
+}

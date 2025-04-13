@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take Attendance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/attend.css') }}">
+</head>
+<body>
+    <h2>Take Attendance</h2>
+
+    <form action="{{ url_for('take_attendance') }}" method="POST">
+        <!-- Auto-fill date -->
+        <label>Date:</label>
+        <input type="date" name="date" id="dateField" required>
+
+        <h3>Students List</h3>
+<table border="1">
+    <tr>
+        <th>Student Name</th>
+        <th>Roll Number</th>
+        <th>Mark Attendance</th>
+        <th>Last 5 Days Attendance</th>
+    </tr>
+    {% for student in students %}
+    <tr>
+        <td>{{ student.fullname }}</td>
+        <td>{{ student.roll_number }}</td>
+        <td>
+            <input type="checkbox" name="attendance" value="{{ student.roll_number }}">
+        </td>
+        <td>
+            {% if student.roll_number in attendance_history %}
+                {% for record in attendance_history[student.roll_number] %}
+                    <span>{{ record[0] }}: <strong>{{ record[1] }}</strong></span><br>
+                {% endfor %}
+            {% else %}
+                <span>No history</span>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+        <br>
+        <button type="submit">Submit Attendance</button>
+    </form>
+
+    <script>
+        // Auto-set today's date
+        document.getElementById('dateField').valueAsDate = new Date();
+    </script>
+</body>
+</html>

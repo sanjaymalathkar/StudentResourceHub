@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/css/admindash.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <a href="{{ url_for('admin_logout') }}" class="logout-btn">Logout</a>
+    </header>
+
+    <main>
+        <section class="stats">
+            <div class="card">
+                <h2>Total Teachers</h2>
+                <p id="teacher-count">Loading...</p>
+            </div>
+            <div class="card">
+                <h2>Total Students</h2>
+                <p id="student-count">Loading...</p>
+            </div>
+        </section>
+
+        <section class="management">
+            <h2>Manage Users</h2>
+            <div class="form-container">
+                <form action="{{ url_for('add_teacher') }}" method="POST">
+                    <h3>Add Teacher</h3>
+                    <input type="text" name="teacher_name" placeholder="Teacher Name" required>
+                    <input type="email" name="teacher_email" placeholder="Email" required>
+                    <input type="password" name="teacher_password" placeholder="Password" required>
+                    <button type="submit">Add Teacher</button>
+                </form>
+
+                <form action="{{ url_for('add_student') }}" method="POST">
+                    <h3>Add Student</h3>
+                    <input type="text" name="student_name" placeholder="Student Name" required>
+                    <input type="email" name="student_email" placeholder="Email" required>
+                    <input type="password" name="student_password" placeholder="Password" required>
+                    <button type="submit">Add Student</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("{{ url_for('get_counts') }}")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("teacher-count").innerText = data.teachers;
+                    document.getElementById("student-count").innerText = data.students;
+                })
+                .catch(error => console.error("Error fetching counts:", error));
+        });
+    </script>
+</body>
+</html>

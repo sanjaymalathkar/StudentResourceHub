@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/uploadview.css') }}">
+    <title>View Resources</title>
+</head>
+<body>
+    <h2>Available Resources</h2>
+    <table border="1">
+        <tr>
+            <th>File Name</th>
+            <th>Download</th>
+        </tr>
+        {% for file in files %}
+        <tr>
+            <td>{{ file.filename }}</td>
+            <td><a href="{{ url_for('download_file', file_id=file._id) }}">Download</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

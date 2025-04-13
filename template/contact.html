@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Your Company</title>
+  <link rel="stylesheet" href="/static/css/index.css"> <!-- Your existing CSS -->
+  <link rel="stylesheet" href="/static/css/contact.css"> <!-- The new contact page CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Floating Shapes Background -->
+  <div class="floating-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    MES COLLEGE STUDENT RESOURCE HUB
+  </header>
+
+  <!-- Navigation -->
+  <nav class="nav-menu">
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('about') }}">About</a>
+    <a href="{{ url_for('programs') }}">Programs</a>
+    <a href="{{ url_for('admissions') }}">Admissions</a>
+    <a href="{{ url_for('resources') }}">Resources</a>
+    <a href="{{ url_for('contact') }}">Contact</a>
+    
+    <div class="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- Contact Hero Section -->
+  <section class="contact-hero">
+    <div class="contact-hero-content">
+      <h1 class="contact-hero-title">Get In Touch</h1>
+      <p class="contact-hero-subtitle">We'd love to hear from you! Reach out to our team with any questions, feedback, or inquiries you may have.</p>
+    </div>
+  </section>
+
+  <!-- Contact Info Section -->
+  <section class="contact-info-section">
+    <div class="section-title">Contact Information</div>
+    <div class="contact-info-container">
+      <div class="contact-card">
+        <div class="contact-icon">
+          <i class="fas fa-phone"></i>
+        </div>
+        <h3>Phone</h3>
+        <p>Main: +1 (555) 123-4567</p>
+        <p>Support: +1 (555) 987-6543</p>
+        <a href="tel:+15551234567" class="contact-link">Call Us Now</a>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <h3>Email</h3>
+        <p>info@yourcompany.com</p>
+        <p>support@yourcompany.com</p>
+        <a href="mailto:info@yourcompany.com" class="contact-link">Send Email</a>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <h3>Location</h3>
+        <p>123 Business Avenue</p>
+        <p>San Francisco, CA 94103</p>
+        <a href="#map-section" class="contact-link">View on Map</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="contact-form-section">
+    <div class="contact-form-container">
+      <h2 class="form-title">Send Us a Message</h2>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name" class="form-label">Your Name</label>
+          <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone" class="form-label">Phone Number</label>
+          <input type="tel" id="phone" name="phone" class="form-input" placeholder="+1 (555) 123-4567">
+        </div>
+
+        <div class="form-group">
+          <label for="subject" class="form-label">Subject</label>
+          <input type="text" id="subject" name="subject" class="form-input" placeholder="How can we help you?">
+        </div>
+
+        <div class="form-group">
+          <label for="message" class="form-label">Your Message</label>
+          <textarea id="message" name="message" class="form-textarea" placeholder="Type your message here..." required></textarea>
+        </div>
+
+        <button type="submit" class="form-submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section id="map-section" class="map-section">
+    <div class="map-overlay"></div>
+    <div class="map-container">
+      <!-- Placeholder for map - in a real implementation, you would use Google Maps or another service -->
+      <img src="/api/placeholder/1920/400" alt="Location Map" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <div class="faq-question">What are your office hours?</div>
+        <div class="faq-answer">
+          <p>Our offices are open Monday through Friday from 9:00 AM to 5:00 PM Pacific Time. We are closed on weekends and major holidays.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">How quickly can I expect a response?</div>
+        <div class="faq-answer">
+          <p>We strive to respond to all inquiries within 24 business hours. For urgent matters, please call our support hotline for immediate assistance.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Do you offer virtual meetings?</div>
+        <div class="faq-answer">
+          <p>Yes, we offer virtual consultations via Zoom, Microsoft Teams, or Google Meet. You can schedule a virtual meeting through our online booking system or by contacting our office directly.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What information should I include in my message?</div>
+        <div class="faq-answer">
+          <p>For the quickest and most accurate response, please include your full name, contact details, and a detailed description of your inquiry or issue. If applicable, mention any previous interactions with our team or relevant account information.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2 class="cta-title">Ready to Get Started?</h2>
+      <p class="cta-text">Join thousands of satisfied customers and experience our premium services. Our team is ready to help you achieve your goals.</p>
+      <a href="#contact-form-section" class="cta-btn">Contact Us Today</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">Your Company</div>
+        <p>Providing innovative solutions since 2010. We're dedicated to excellence and customer satisfaction.</p>
+        <div class="social-icons">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3 class="footer-title">Legal</h3>
+        <ul class="footer-links">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="cookies.html">Cookie Policy</a></li>
+          <li><a href="disclaimer.html">Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Your Company. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript for interactive elements -->
+  <script>
+    // Toggle mobile menu
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    // FAQ functionality
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(question => {
+      question.addEventListener('click', () => {
+        question.classList.toggle('active');
+        const answer = question.nextElementSibling;
+        answer.classList.toggle('active');
+      });
+    });
+
+    // Form submission (placeholder)
+    const contactForm = document.getElementById('contactForm');
+    
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for your message! We will contact you soon.');
+      contactForm.reset();
+    });
+
+    // Sticky navigation
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('.nav-menu');
+      if (window.scrollY > 100) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+</html>
