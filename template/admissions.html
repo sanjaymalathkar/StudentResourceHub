@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admissions - MES College Student Resource Hub</title>
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Admissions Page Specific Styles */
+    .admissions-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: var(--white);
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .admissions-hero-title {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .admissions-hero-subtitle {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .admissions-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    
+    .admissions-section {
+      margin-bottom: 3rem;
+    }
+    
+    .admissions-section-title {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-left: 1rem;
+    }
+    
+    .admissions-section-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background-color: var(--primary);
+      border-radius: 2px;
+    }
+    
+    .admissions-section-content {
+      color: #64748b;
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+    
+    .steps-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .step-item {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+    
+    .step-number {
+      width: 50px;
+      height: 50px;
+      background-color: var(--primary);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.3rem;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    
+    .step-content {
+      flex: 1;
+    }
+    
+    .step-title {
+      font-size: 1.3rem;
+      color: var(--dark);
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .step-description {
+      color: #64748b;
+      line-height: 1.6;
+    }
+    
+    .requirements-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0;
+    }
+    
+    .requirement-item {
+      padding: 1rem 1.5rem 1rem 3rem;
+      background-color: #f8fafc;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    
+    .requirement-item::before {
+      content: '✓';
+      position: absolute;
+      left: 1rem;
+      color: var(--primary);
+      font-weight: bold;
+    }
+    
+    .dates-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .date-card {
+      flex: 1;
+      min-width: 250px;
+      background-color: var(--white);
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--primary);
+    }
+    
+    .date-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+    
+    .date-value {
+      font-size: 1.3rem;
+      color: var(--primary);
+      font-weight: bold;
+    }
+    
+    .cta-section {
+      background-color: #f8fafc;
+      padding: 4rem 2rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    
+    .cta-title {
+      font-size: 2rem;
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+    }
+    
+    .cta-text {
+      color: #64748b;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .cta-btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background-color: var(--primary);
+      color: var(--white);
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    
+    .cta-btn.secondary {
+      background-color: var(--white);
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+    
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      background-color: var(--accent);
+    }
+    
+    .cta-btn.secondary:hover {
+      background-color: #f1f5f9;
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    
+    .faq-section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .faq-title {
+      font-size: 2rem;
+      color: var(--dark);
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .faq-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .faq-item {
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .faq-question {
+      padding: 1.2rem 1.5rem;
+      background-color: var(--white);
+      font-weight: 600;
+      color: var(--dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background-color 0.3s ease;
+    }
+    
+    .faq-question::after {
+      content: '+';
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+    
+    .faq-question.active {
+      background-color: #f8fafc;
+    }
+    
+    .faq-question.active::after {
+      content: '−';
+    }
+    
+    .faq-answer {
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    
+    .faq-answer.active {
+      padding: 1.2rem 1.5rem;
+      max-height: 500px;
+    }
+    
+    .faq-answer p {
+      margin: 0;
+      color: #64748b;
+      line-height: 1.6;
+    }
+    
+    @media (max-width: 768px) {
+      .step-item {
+        flex-direction: column;
+      }
+      
+      .step-number {
+        margin-bottom: 0.5rem;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Background Shapes -->
+  <div class="floating-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+
+  <header>MES COLLEGE STUDENT RESOURCE HUB</header>
+  
+  <!-- Mobile Menu Toggle -->
+  <div class="menu-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <nav class="nav-menu">
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('about') }}">About</a>
+    <a href="{{ url_for('programs') }}">Programs</a>
+    <a href="{{ url_for('admissions') }}">Admissions</a>
+    <a href="{{ url_for('resources') }}">Resources</a>
+    <a href="{{ url_for('contact') }}">Contact</a>
+  </nav>
+
+  <!-- Admissions Hero Section -->
+  <section class="admissions-hero">
+    <h1 class="admissions-hero-title">Join Our Community of Learners</h1>
+    <p class="admissions-hero-subtitle">Embark on your educational journey with MES College. Our admissions process is designed to be straightforward and supportive.</p>
+  </section>
+
+  <!-- Admissions Content -->
+  <div class="admissions-content">
+    <!-- Overview Section -->
+    <section class="admissions-section">
+      <h2 class="admissions-section-title">Admissions Overview</h2>
+      <div class="admissions-section-content">
+        <p>At MES College, we welcome applications from students who are passionate about learning and eager to make a positive impact in their chosen fields. Our admissions process is designed to identify students who demonstrate academic potential, leadership qualities, and a commitment to personal growth.</p>
+        <p>We evaluate each application holistically, considering academic achievements, extracurricular involvement, personal essays, and letters of recommendation to gain a comprehensive understanding of each applicant's strengths and potential contributions to our community.</p>
+      </div>
+    </section>
+
+    <!-- Application Process Section -->
+    <section class="admissions-section">
+      <h2 class="admissions-section-title">Application Process</h2>
+      <div class="admissions-section-content">
+        <p>Follow these steps to complete your application to MES College:</p>
+        
+        <div class="steps-container">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3 class="step-title">Choose Your Program</h3>
+              <p class="step-description">Explore our range of undergraduate and graduate programs to find the one that aligns with your academic interests and career goals. Each program has specific eligibility requirements that you should review carefully.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3 class="step-title">Complete the Online Application</h3>
+              <p class="step-description">Fill out our comprehensive online application form, providing details about your academic background, extracurricular activities, and personal achievements. Make sure all information is accurate and complete.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3 class="step-title">Submit Supporting Documents</h3>
+              <p class="step-description">Upload all required documents, including academic transcripts, standardized test scores, statement of purpose, letters of recommendation, and any program-specific materials. Incomplete applications may delay the review process.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3 class="step-title">Pay the Application Fee</h3>
+              <p class="step-description">Submit the non-refundable application fee to complete your application. Fee waivers may be available for students demonstrating financial need. Contact our admissions office for more information about fee waiver eligibility.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <h3 class="step-title">Interview (if required)</h3>
+              <p class="step-description">Some programs may require an interview as part of the selection process. If invited for an interview, prepare to discuss your background, academic interests, and future goals with our admissions committee.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-number">6</div>
+            <div class="step-content">
+              <h3 class="step-title">Receive Admission Decision</h3>
+              <p class="step-description">Application decisions are typically communicated within 4-6 weeks after the application deadline. Successful applicants will receive an offer of admission along with scholarship information (if applicable).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Requirements Section -->
+    <section class="admissions-section">
+      <h2 class="admissions-section-title">Admission Requirements</h2>
+      <div class="admissions-section-content">
+        <p>The following documents and qualifications are generally required for admission to MES College programs:</p>
+        
+        <ul class="requirements-list">
+          <li class="requirement-item">Completed online application form</li>
+          <li class="requirement-item">Official academic transcripts from all previously attended institutions</li>
+          <li class="requirement-item">Standardized test scores (as applicable for your program)</li>
+          <li class="requirement-item">Statement of purpose outlining your academic interests and career goals</li>
+          <li class="requirement-item">Two letters of recommendation from teachers, counselors, or employers</li>
+          <li class="requirement-item">Copy of government-issued identification</li>
+          <li class="requirement-item">Proof of English proficiency for international applicants (TOEFL/IELTS)</li>
+          <li class="requirement-item">Portfolio or additional materials (for specific programs only)</li>
+        </ul>
+        
+        <p>Please note that specific requirements may vary by program. Visit the individual program pages for detailed admission criteria.</p>
+      </div>
+    </section>
+
+    <!-- Important Dates Section -->
+    <section class="admissions-section">
+      <h2 class="admissions-section-title">Important Dates</h2>
+      <div class="admissions-section-content">
+        <p>Mark these key dates on your calendar to ensure timely submission of your application:</p>
+        
+        <div class="dates-container">
+          <div class="date-card">
+            <div class="date-title">Early Decision Application Deadline</div>
+            <div class="date-value">November 15, 2025</div>
+          </div>
+          
+          <div class="date-card">
+            <div class="date-title">Regular Decision Application Deadline</div>
+            <div class="date-value">January 15, 2026</div>
+          </div>
+          
+          <div class="date-card">
+            <div class="date-title">Financial Aid Application Deadline</div>
+            <div class="date-value">February 1, 2026</div>
+          </div>
+          
+          <div class="date-card">
+            <div class="date-title">Admission Decisions Released</div>
+            <div class="date-value">March 31, 2026</div>
+          </div>
+          
+          <div class="date-card">
+            <div class="date-title">Enrollment Confirmation Deadline</div>
+            <div class="date-value">May 1, 2026</div>
+          </div>
+          
+          <div class="date-card">
+            <div class="date-title">Orientation Week Begins</div>
+            <div class="date-value">August 25, 2026</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Call to Action Section -->
+  <section class="cta-section">
+    <h2 class="cta-title">Ready to Apply?</h2>
+    <p class="cta-text">Take the first step toward your future at MES College. Our admissions team is here to support you throughout the application process. If you have any questions, don't hesitate to reach out to us.</p>
+    <div class="cta-buttons">
+      <a href="{{ url_for('application_form') }}" class="cta-btn">Start Your Application</a>
+      <a href="{{ url_for('contact') }}" class="cta-btn secondary">Contact Admissions</a>
+    </div>
+  </section>
+
+  <!-- Application Section -->
+  <section class="application-section py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto text-center">
+                <h2 class="section-title mb-4">Start Your Application</h2>
+                <p class="lead mb-4">Ready to join our community of learners? Begin your academic journey with us by completing our online application form.</p>
+                <a href="{{ url_for('application_form') }}" class="btn btn-primary btn-lg">Apply Now</a>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <h2 class="faq-title">Frequently Asked Questions</h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <div class="faq-question">What is the average acceptance rate at MES College?</div>
+        <div class="faq-answer">
+          <p>MES College has an acceptance rate of approximately 65%, which varies by program. More competitive programs like Computer Science and Business Administration typically have lower acceptance rates.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Can I apply to multiple programs simultaneously?</div>
+        <div class="faq-answer">
+          <p>Yes, you can apply to up to three programs at MES College with a single application fee. Please list your programs in order of preference on your application form.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Does MES College offer scholarships for incoming students?</div>
+        <div class="faq-answer">
+          <p>Yes, MES College offers a range of merit-based and need-based scholarships for qualified applicants. Scholarships are automatically considered as part of your admission application, with additional opportunities available through our Financial Aid office.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Is on-campus housing guaranteed for first-year students?</div>
+        <div class="faq-answer">
+          <p>On-campus housing is guaranteed for all first-year students who meet the housing application deadline. Housing assignments are made on a first-come, first-served basis, so we recommend applying early.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">How can I arrange a campus tour?</div>
+        <div class="faq-answer">
+          <p>Campus tours are available Monday through Friday and select Saturdays. You can schedule a tour through our Admissions Office online portal or by calling us at (123) 456-7890. Virtual tours are also available for those unable to visit in person.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">What support services are available for international students?</div>
+        <div class="faq-answer">
+          <p>MES College provides comprehensive support for international students, including visa assistance, orientation programs, English language support, cultural integration activities, and dedicated international student advisors to help with academic and personal concerns.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">MES COLLEGE</div>
+        <p>Empowering students with knowledge, skills, and values for a successful future.</p>
+        <div class="social-icons">
+          <a href="#" class="social-icon">🔵</a>
+          <a href="#" class="social-icon">🐦</a>
+          <a href="#" class="social-icon">📷</a>
+          <a href="#" class="social-icon">🔴</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+          <li><a href="{{ url_for('about') }}">About Us</a></li>
+          <li><a href="{{ url_for('programs') }}">Programs</a></li>
+          <li><a href="{{ url_for('admissions') }}">Admissions</a></li>
+          <li><a href="{{ url_for('resources') }}">Resources</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3 class="footer-title">Contact Us</h3>
+        <div class="contact-info">
+          <span class="contact-icon">📍</span>
+          <span>123 Education Blvd, University City</span>
+        </div>
+        <div class="contact-info">
+          <span class="contact-icon">📞</span>
+          <span>+1 234 567 8900</span>
+        </div>
+        <div class="contact-info">
+          <span class="contact-icon">✉️</span>
+          <span>info@mescollege.edu</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      &copy; 2025 MES College | All Rights Reserved
+    </div>
+  </footer>
+
+  <script>
+    // Toggle mobile menu
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+    
+    // FAQ functionality
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(question => {
+      question.addEventListener('click', () => {
+        question.classList.toggle('active');
+        const answer = question.nextElementSibling;
+        answer.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html> 

@@ -4,180 +4,289 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MES - Student Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <style>
+        /* Variables */
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #3b82f6;
+            --accent: #f97316;
+            --light: #f1f5f9;
+            --dark: #0f172a;
+            --success: #10b981;
+            --white: #ffffff;
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* General Styles */
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        header {
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 1.5rem 0;
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-        
-        .nav-menu {
-            background-color: #34495e;
-            display: flex;
-            justify-content: center;
-            padding: 0.8rem 0;
-        }
-        
-        .nav-menu a {
-            color: white;
-            text-decoration: none;
-            padding: 0 20px;
-            font-size: 1rem;
-        }
-        
-        .nav-menu a:hover {
-            color: #3498db;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        
-        h2 {
-            margin-bottom: 1.5rem;
-            color: #2c3e50;
-            text-align: center;
-        }
-        
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-        
-        label {
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-            display: block;
-        }
-        
-        select, input, button {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-        
-        button {
-            background-color: #2ecc71;
-            color: white;
-            border: none;
-            padding: 15px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 1rem;
-            transition: background-color 0.3s;
-        }
-        
-        button:hover {
-            background-color: #27ae60;
-        }
-        
-        .flash-message {
-            padding: 12px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-        
-        .flash-success {
-            background-color: #dff0d8;
-            border: 1px solid #d6e9c6;
-            color: #3c763d;
-        }
-        
-        .flash-error {
-            background-color: #f2dede;
-            border: 1px solid #ebccd1;
-            color: #a94442;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 1.5rem 0;
-            background-color: #2c3e50;
-            color: white;
-            margin-top: 30px;
-            width: 100%;
-        }
-
-        .test-links {
-            margin-top: 2rem;
-            border-top: 1px solid #eee;
-            padding-top: 1.5rem;
-        }
-        
-        .test-links h3 {
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-            color: #3498db;
-        }
-        
-        .module-container {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            color: var(--dark);
+            overflow-x: hidden;
             position: relative;
         }
         
-        .loading-indicator {
-            position: absolute;
-            right: 10px;
-            top: 42px;
-            display: none;
+        /* 3D Floating Elements */
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
         }
         
-        /* Style for resources display section */
+        .shape {
+            position: absolute;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            border-radius: 50%;
+            opacity: 0.1;
+            filter: blur(5px);
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .shape:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 20s;
+        }
+        
+        .shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            left: 70%;
+            animation-delay: 5s;
+            animation-duration: 25s;
+        }
+        
+        .shape:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            top: 30%;
+            left: 80%;
+            animation-delay: 10s;
+            animation-duration: 18s;
+        }
+        
+        .shape:nth-child(4) {
+            width: 180px;
+            height: 180px;
+            top: 70%;
+            left: 20%;
+            animation-delay: 15s;
+            animation-duration: 22s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(100px, 50px) rotate(180deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            z-index: 10;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: linear-gradient(45deg, transparent 65%, rgba(255, 255, 255, 0.2) 75%, transparent 85%);
+            animation: shine 5s infinite linear;
+        }
+        
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) rotate(45deg);
+            }
+        }
+        
+        /* Navigation */
+        .nav-menu {
+            background-color: var(--white);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .nav-menu a {
+            color: var(--primary);
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-menu a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .nav-menu a:hover::before {
+            width: 100%;
+        }
+        
+        .logout-btn {
+            color: #dc3545 !important;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0;
+            background-color: transparent;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        
+        /* Headings */
+        h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        h3 {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Flash Messages */
+        .flash-message {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            animation: fadeIn 0.5s;
+        }
+        
+        .flash-success {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+        
+        .flash-error, .flash-danger {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+            border: 1px solid #dc3545;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* Resources Display Section */
         .resources-container {
             margin-top: 2rem;
-            border-top: 2px solid #eee;
-            padding-top: 1.5rem;
+            padding: 0;
         }
         
         .resources-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #34495e;
-            color: white;
-            padding: 0.8rem 1.2rem;
-            border-radius: 5px 5px 0 0;
-            margin-bottom: 1px;
+            background: var(--white);
+            color: var(--primary);
+            padding: 1.2rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .resources-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
         
         .resource-section {
             margin-bottom: 2rem;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow-md);
             overflow: hidden;
+            position: relative;
         }
         
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #3498db;
-            color: white;
-            padding: 0.8rem 1.2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 1rem 1.5rem;
             border-bottom: 1px solid #e0e0e0;
         }
         
@@ -186,16 +295,19 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            color: var(--white);
+            font-weight: 600;
         }
         
         .resource-count {
-            background-color: white;
-            color: #3498db;
+            background-color: var(--white);
+            color: var(--primary);
             font-size: 0.8rem;
             font-weight: bold;
-            padding: 0.2rem 0.5rem;
+            padding: 0.2rem 0.8rem;
             border-radius: 50px;
             margin-left: 8px;
+            box-shadow: var(--shadow-sm);
         }
         
         .resource-list {
@@ -205,219 +317,609 @@
         }
         
         .resource-item {
-            padding: 1rem 1.5rem;
+            padding: 1.2rem 1.5rem;
             border-bottom: 1px solid #f0f0f0;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.3s ease;
         }
         
         .resource-item:hover {
             background-color: #f9f9f9;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
         }
         
         .resource-info h4 {
-            margin: 0 0 0.5rem 0;
-            color: #2c3e50;
+            margin: 0 0 0.8rem 0;
+            color: var(--primary);
+            font-weight: 600;
         }
         
         .resource-metadata {
-            font-size: 0.85rem;
-            color: #7f8c8d;
+            font-size: 0.9rem;
+            color: #64748b;
         }
         
         .resource-metadata span {
-            margin-right: 1rem;
+            margin-right: 1.2rem;
             display: inline-block;
         }
         
         .download-btn {
-            background-color: #2ecc71;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.9rem;
             white-space: nowrap;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
         }
         
         .download-btn:hover {
-            background-color: #27ae60;
-            text-decoration: none;
+            background-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
         }
         
         .no-resources {
             text-align: center;
-            padding: 2rem;
-            color: #7f8c8d;
+            padding: 2.5rem;
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+        
+        /* Activities Banner */
+        .activities-banner {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .activities-banner::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #9b59b6, #8e44ad);
+        }
+        
+        .activities-banner h3 {
+            color: #9b59b6;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .activities-list {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding-bottom: 10px;
+        }
+        
+        .activity-card {
+            min-width: 250px;
+            background: var(--white);
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+        
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* Module Container */
+        .module-container {
+            position: relative;
+        }
+        
+        .loading-indicator {
+            position: absolute;
+            right: 15px;
+            top: 45px;
+            display: none;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        table th {
+            background-color: var(--primary);
+            color: var(--white);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+        
+        table tr {
+            border-bottom: 1px solid #f1f1f1;
+            transition: background-color 0.3s ease;
+        }
+        
+        table tr:last-child {
+            border-bottom: none;
+        }
+        
+        table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            margin-top: 50px;
+            width: 100%;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .nav-menu {
+                padding: 0.8rem 0.5rem;
+            }
+            
+            .nav-menu a {
+                margin: 0 1rem;
+                font-size: 1rem;
+            }
+            
+            .resource-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .download-btn {
+                margin-top: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header {
+                padding: 1rem;
+                font-size: 1.5rem;
+            }
+            
+            .nav-menu a {
+                margin: 0 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            form {
+                padding: 15px;
+            }
+            
+            .activities-list {
+                flex-direction: column;
+            }
+            
+            .activity-card {
+                min-width: 100%;
+            }
+        }
+        
+        /* Dashboard Section */
+        .dashboard-section {
+            background-color: #ffffff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Form styling */
+        .filter-form {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            background-color: #fff;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        
+        .form-group select:focus {
+            border-color: #6c757d;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.25);
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .form-actions button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        
+        .form-actions button:hover {
+            background-color: #0069d9;
+        }
+        
+        .loading-indicator {
+            display: none;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #6c757d;
         }
     </style>
 </head>
 <body>
+    <!-- Floating Background Shapes -->
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
     <header>MES Institution - Student Portal</header>
     
     <nav class="nav-menu">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('programs') }}">Programs</a>
+        <a href="{{ url_for('resources') }}">Resources</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+        <a href="{{ url_for('logout_student') }}" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
     </nav>
     
     <div class="container">
-        <h2>Resource Dashboard</h2>
-        
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="flash-message flash-{{ category }}">{{ message }}</div>
-                {% endfor %}
+        <div class="dashboard-section">
+            <h2><i class="fas fa-graduation-cap"></i> Student Resource Dashboard</h2>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <!-- Upcoming Activities Banner -->
+            {% if activities %}
+            <div class="activities-banner">
+                <h3><i class="fas fa-calendar-alt"></i> Upcoming Activities</h3>
+                <div class="activities-list">
+                    {% for activity in activities %}
+                    <div class="activity-card">
+                        <div style="font-weight: bold; margin-bottom: 5px;">{{ activity.name }}</div>
+                        <div style="font-size: 0.9em; color: #666;">{{ activity.date }}</div>
+                        <div style="margin-top: 8px;">
+                            {% if activity.type == 'Cultural' %}
+                            <span style="background-color: #9b59b6; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.8em;">Cultural</span>
+                            {% elif activity.type == 'Sports' %}
+                            <span style="background-color: #2ecc71; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.8em;">Sports</span>
+                            {% elif activity.type == 'Academic' %}
+                            <span style="background-color: #3498db; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.8em;">Academic</span>
+                            {% else %}
+                            <span style="background-color: #e67e22; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.8em;">{{ activity.type }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div style="text-align: right; margin-top: 10px;">
+                    <a href="{{ url_for('view_activities') }}" style="text-decoration: none; color: #9b59b6; font-weight: bold;">
+                        View All Activities
+                    </a>
+                </div>
+            </div>
             {% endif %}
-        {% endwith %}
-        
-        <form id="courseForm" action="{{ url_for('student_dashboard') }}" method="POST">
-            <div>
-                <label for="course">Course:</label>
-                <select id="course" name="course" required>
-                    <option value="" disabled {% if not selected_course %}selected{% endif %}>Select Course</option>
-                    <option value="BCA" {% if selected_course == "BCA" %}selected{% endif %}>BCA</option>
-                    <option value="BBA" {% if selected_course == "BBA" %}selected{% endif %}>BBA</option>
-                    <option value="BCOM" {% if selected_course == "BCOM" %}selected{% endif %}>BCOM</option>
-                </select>
-            </div>
             
-            <div>
-                <label for="year">Year:</label>
-                <select id="year" name="year" required>
-                    <option value="" disabled {% if not selected_year %}selected{% endif %}>Select Year</option>
-                    <option value="1st Year" {% if selected_year == "1st Year" %}selected{% endif %}>1st Year</option>
-                    <option value="2nd Year" {% if selected_year == "2nd Year" %}selected{% endif %}>2nd Year</option>
-                    <option value="3rd Year" {% if selected_year == "3rd Year" %}selected{% endif %}>3rd Year</option>
-                </select>
-            </div>
-            
-            <div class="module-container">
-                <label for="module">Module:</label>
-                <select id="module" name="module">
-                    <option value="all" {% if selected_module == "all" %}selected{% endif %}>All Modules</option>
-                    {% if available_modules %}
-                        {% for module_name in available_modules %}
-                            <option value="{{ module_name }}" {% if selected_module == module_name %}selected{% endif %}>{{ module_name }}</option>
-                        {% endfor %}
-                    {% endif %}
-                </select>
-                <div class="loading-indicator" id="moduleLoading">Loading...</div>
-            </div>
-            
-            <button type="submit">View Resources</button>
-        </form>
-        
-        <!-- Resources Display Section -->
-        {% if selected_course and selected_year %}
-        <div class="resources-container">
-            <div class="resources-header">
-                <h3>{{ selected_course }} - {{ selected_year }} {% if selected_module != "all" %}- {{ selected_module }}{% endif %}</h3>
-            </div>
-            
-            <!-- Course Resources Section -->
-            <div class="resource-section">
-                <div class="section-header">
-                    <h3>📚 Course Materials <span class="resource-count">{{ resources|length }}</span></h3>
+            <form id="courseForm" action="{{ url_for('student_dashboard') }}" method="POST" class="filter-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="course">Course:</label>
+                        <select id="course" name="course" required>
+                            <option value="" disabled {% if not selected_course %}selected{% endif %}>Select Course</option>
+                            <option value="BCA" {% if selected_course == "BCA" %}selected{% endif %}>BCA</option>
+                            <option value="BBA" {% if selected_course == "BBA" %}selected{% endif %}>BBA</option>
+                            <option value="BCOM" {% if selected_course == "BCOM" %}selected{% endif %}>BCOM</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="year">Year:</label>
+                        <select id="year" name="year" required>
+                            <option value="" disabled {% if not selected_year %}selected{% endif %}>Select Year</option>
+                            <option value="1st Year" {% if selected_year == "1st Year" %}selected{% endif %}>1st Year</option>
+                            <option value="2nd Year" {% if selected_year == "2nd Year" %}selected{% endif %}>2nd Year</option>
+                            <option value="3rd Year" {% if selected_year == "3rd Year" %}selected{% endif %}>3rd Year</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group module-container">
+                        <label for="module">Module:</label>
+                        <select id="module" name="module">
+                            <option value="all" {% if selected_module == "all" %}selected{% endif %}>All Modules</option>
+                            {% if available_modules %}
+                                {% for module_name in available_modules %}
+                                    <option value="{{ module_name }}" {% if selected_module == module_name %}selected{% endif %}>{{ module_name }}</option>
+                                {% endfor %}
+                            {% endif %}
+                        </select>
+                        <div class="loading-indicator" id="moduleLoading">Loading...</div>
+                    </div>
                 </div>
                 
-                {% if resources and resources|length > 0 %}
+                <div class="form-actions">
+                    <button type="submit"><i class="fas fa-search"></i> View Resources</button>
+                </div>
+            </form>
+            
+            <!-- Resources Display Section -->
+            {% if selected_course and selected_year %}
+            <div class="resources-container">
+                <div class="resources-header">
+                    <h3><i class="fas fa-book-open"></i> {{ selected_course }} - {{ selected_year }} {% if selected_module != "all" %}- {{ selected_module }}{% endif %}</h3>
+                </div>
+                
+                <!-- Course Resources Section -->
+                <div class="resource-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-file-alt"></i> Course Materials <span class="resource-count">{{ resources|length }}</span></h3>
+                    </div>
+                    
+                    {% if resources and resources|length > 0 %}
+                        <ul class="resource-list">
+                            {% for resource in resources %}
+                                <li class="resource-item">
+                                    <div class="resource-info">
+                                        <h4>{{ resource.filename }}</h4>
+                                        <div class="resource-metadata">
+                                            {% if resource.module %}<span><i class="fas fa-folder"></i> Module: {{ resource.module }}</span>{% endif %}
+                                            {% if resource.subject %}<span><i class="fas fa-book"></i> Subject: {{ resource.subject }}</span>{% endif %}
+                                            {% if resource.upload_date %}
+                                                <span><i class="fas fa-calendar"></i> Uploaded: 
+                                                {% if resource.upload_date is string %}
+                                                    {{ resource.upload_date }}
+                                                {% elif resource.upload_date is mapping and "$date" in resource.upload_date %}
+                                                    {{ resource.upload_date["$date"]|replace("T", " ")|replace("Z", "")|truncate(16, True, "") }}
+                                                {% else %}
+                                                    {{ resource.upload_date.strftime('%d-%m-%Y') if resource.upload_date is not none else 'Unknown date' }}
+                                                {% endif %}
+                                                </span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% if resource.file_id %}
+                                        <a href="{{ url_for('download_resource', resource_id=resource.file_id) }}" class="download-btn"><i class="fas fa-download"></i> Download</a>
+                                    {% elif resource._id %}
+                                        <a href="{{ url_for('download_resource', resource_id=resource._id) }}" class="download-btn"><i class="fas fa-download"></i> Download</a>
+                                    {% else %}
+                                        <span class="download-btn" style="background-color: #95a5a6;"><i class="fas fa-exclamation-triangle"></i> Not Available</span>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <div class="no-resources">
+                            <i class="fas fa-folder-open" style="font-size: 3rem; color: #cbd5e1; margin-bottom: 15px;"></i>
+                            <p>No course materials found for this selection.</p>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Question Papers Section -->
+                {% if question_papers and question_papers|length > 0 %}
+                <div class="resource-section">
+                    <div class="section-header" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);">
+                        <h3><i class="fas fa-file-alt"></i> Question Papers <span class="resource-count">{{ question_papers|length }}</span></h3>
+                    </div>
+                    
                     <ul class="resource-list">
-                        {% for resource in resources %}
+                        {% for paper in question_papers %}
                             <li class="resource-item">
                                 <div class="resource-info">
-                                    <h4>{{ resource.filename }}</h4>
+                                    <h4>{{ paper.filename }}</h4>
                                     <div class="resource-metadata">
-                                        {% if resource.module %}<span>📂 Module: {{ resource.module }}</span>{% endif %}
-                                        {% if resource.subject %}<span>📑 Subject: {{ resource.subject }}</span>{% endif %}
-                                        {% if resource.upload_date %}
-                                            <span>📅 Uploaded: 
-                                            {% if resource.upload_date is string %}
-                                                {{ resource.upload_date }}
-                                            {% elif resource.upload_date is mapping and "$date" in resource.upload_date %}
-                                                {{ resource.upload_date["$date"]|replace("T", " ")|replace("Z", "")|truncate(16, True, "") }}
-                                            {% else %}
-                                                {{ resource.upload_date.strftime('%d-%m-%Y') if resource.upload_date is not none else 'Unknown date' }}
-                                            {% endif %}
-                                            </span>
-                                        {% endif %}
+                                        {% if paper.module %}<span><i class="fas fa-folder"></i> Module: {{ paper.module }}</span>{% endif %}
+                                        {% if paper.subject %}<span><i class="fas fa-book"></i> Subject: {{ paper.subject }}</span>{% endif %}
                                     </div>
                                 </div>
-                                {% if resource.file_id %}
-                                    <a href="{{ url_for('download_resource', resource_id=resource.file_id) }}" class="download-btn">📄 Download</a>
-                                {% elif resource._id %}
-                                    <a href="{{ url_for('download_resource', resource_id=resource._id) }}" class="download-btn">📄 Download</a>
+                                {% if paper.file_id %}
+                                    <a href="{{ url_for('download_resource', resource_id=paper.file_id) }}" class="download-btn" style="background-color: #3498db;"><i class="fas fa-download"></i> Download</a>
+                                {% elif paper._id %}
+                                    <a href="{{ url_for('download_resource', resource_id=paper._id) }}" class="download-btn" style="background-color: #3498db;"><i class="fas fa-download"></i> Download</a>
                                 {% else %}
-                                    <span class="download-btn" style="background-color: #95a5a6;">⚠️ Not Available</span>
+                                    <span class="download-btn" style="background-color: #95a5a6;"><i class="fas fa-exclamation-triangle"></i> Not Available</span>
                                 {% endif %}
                             </li>
                         {% endfor %}
                     </ul>
-                {% else %}
-                    <div class="no-resources">
-                        <p>No course materials found for this selection.</p>
-                    </div>
+                </div>
                 {% endif %}
-            </div>
-            
-            <!-- Question Papers Section -->
-            {% if question_papers and question_papers|length > 0 %}
-            <div class="resource-section">
-                <div class="section-header">
-                    <h3>📊 Question Papers <span class="resource-count">{{ question_papers|length }}</span></h3>
+                
+                <!-- YouTube References Section -->
+                {% if youtube_links and youtube_links|length > 0 %}
+                <div class="resource-section">
+                    <div class="section-header" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
+                        <h3><i class="fab fa-youtube"></i> YouTube References <span class="resource-count">{{ youtube_links|length }}</span></h3>
+                    </div>
+                    
+                    <ul class="resource-list">
+                        {% for video in youtube_links %}
+                            <li class="resource-item">
+                                <div class="resource-info">
+                                    <h4>{{ video.title|default(video.url) }}</h4>
+                                    <div class="resource-metadata">
+                                        {% if video.module %}<span><i class="fas fa-folder"></i> Module: {{ video.module }}</span>{% endif %}
+                                        {% if video.subject %}<span><i class="fas fa-book"></i> Subject: {{ video.subject }}</span>{% endif %}
+                                    </div>
+                                </div>
+                                <a href="{{ video.url }}" target="_blank" class="download-btn" style="background-color: #e74c3c;"><i class="fas fa-play"></i> Watch Video</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                
+                <!-- ACTIVITIES SECTION -->
+                <div class="resource-section">
+                    <div class="section-header" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">
+                        <h3><i class="fas fa-calendar-alt"></i> Upcoming Activities <span class="resource-count">{{ activities|length }}</span></h3>
+                    </div>
+                    
+                    <div class="resource-list">
+                        {% if activities and activities|length > 0 %}
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Activity</th>
+                                        <th>Date</th>
+                                        <th>Type</th>
+                                        <th>Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for activity in activities %}
+                                        <tr>
+                                            <td><strong>{{ activity.name }}</strong></td>
+                                            <td>{{ activity.date }}</td>
+                                            <td>
+                                                {% if activity.type == 'Cultural' %}
+                                                <span style="background-color: #9b59b6; color: white; padding: 3px 8px; border-radius: 50px; font-size: 0.8rem;">Cultural</span>
+                                                {% elif activity.type == 'Sports' %}
+                                                <span style="background-color: #2ecc71; color: white; padding: 3px 8px; border-radius: 50px; font-size: 0.8rem;">Sports</span>
+                                                {% elif activity.type == 'Academic' %}
+                                                <span style="background-color: #3498db; color: white; padding: 3px 8px; border-radius: 50px; font-size: 0.8rem;">Academic</span>
+                                                {% else %}
+                                                <span style="background-color: #e67e22; color: white; padding: 3px 8px; border-radius: 50px; font-size: 0.8rem;">{{ activity.type }}</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ activity.description }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <div class="no-resources">
+                                <i class="fas fa-calendar-times" style="font-size: 3rem; color: #cbd5e1; margin-bottom: 15px;"></i>
+                                <p>No upcoming activities scheduled at this time.</p>
+                            </div>
+                        {% endif %}
+                        <div style="text-align: right; padding: 15px;">
+                            <a href="{{ url_for('view_activities') }}" class="download-btn" style="background-color: #9b59b6;">
+                                <i class="fas fa-external-link-alt"></i> View All Activities
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 
-                <ul class="resource-list">
-                    {% for paper in question_papers %}
-                        <li class="resource-item">
-                            <div class="resource-info">
-                                <h4>{{ paper.filename }}</h4>
-                                <div class="resource-metadata">
-                                    {% if paper.module %}<span>📂 Module: {{ paper.module }}</span>{% endif %}
-                                    {% if paper.subject %}<span>📑 Subject: {{ paper.subject }}</span>{% endif %}
-                                </div>
+                <!-- REFERENCE BOOKS SECTION -->
+                <div class="resource-section">
+                    <div class="section-header" style="background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);">
+                        <h3><i class="fas fa-book"></i> Reference Books <span class="resource-count">{{ reference_books|length }}</span></h3>
+                    </div>
+                    
+                    <div class="resource-list">
+                        {% if reference_books and reference_books|length > 0 %}
+                            <ul class="resource-list">
+                                {% for book in reference_books %}
+                                    <li class="resource-item">
+                                        <div class="resource-info">
+                                            <h4>{{ book.title }}</h4>
+                                            <div class="resource-metadata">
+                                                <span><i class="fas fa-user"></i> Author: {{ book.author }}</span>
+                                                {% if book.module %}<span><i class="fas fa-folder"></i> Module: {{ book.module }}</span>{% endif %}
+                                                {% if book.subject %}<span><i class="fas fa-bookmark"></i> Subject: {{ book.subject }}</span>{% endif %}
+                                            </div>
+                                            {% if book.description %}
+                                                <p style="margin-top: 10px; font-style: italic; color: #64748b;">{{ book.description }}</p>
+                                            {% endif %}
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <div class="no-resources">
+                                <i class="fas fa-books" style="font-size: 3rem; color: #cbd5e1; margin-bottom: 15px;"></i>
+                                <p>No reference books found for this selection.</p>
                             </div>
-                            {% if paper.file_id %}
-                                <a href="{{ url_for('download_resource', resource_id=paper.file_id) }}" class="download-btn">📋 Download</a>
-                            {% elif paper._id %}
-                                <a href="{{ url_for('download_resource', resource_id=paper._id) }}" class="download-btn">📋 Download</a>
-                            {% else %}
-                                <span class="download-btn" style="background-color: #95a5a6;">⚠️ Not Available</span>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
-            
-            <!-- YouTube References Section -->
-            {% if youtube_links and youtube_links|length > 0 %}
-            <div class="resource-section">
-                <div class="section-header">
-                    <h3>🎥 YouTube References <span class="resource-count">{{ youtube_links|length }}</span></h3>
+                        {% endif %}
+                        <div style="text-align: right; padding: 15px;">
+                            <a href="{{ url_for('view_reference_books') }}" class="download-btn" style="background-color: #e67e22;">
+                                <i class="fas fa-external-link-alt"></i> View All Reference Books
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                
-                <ul class="resource-list">
-                    {% for video in youtube_links %}
-                        <li class="resource-item">
-                            <div class="resource-info">
-                                <h4>{{ video.title|default(video.url) }}</h4>
-                                <div class="resource-metadata">
-                                    {% if video.module %}<span>📂 Module: {{ video.module }}</span>{% endif %}
-                                    {% if video.subject %}<span>📑 Subject: {{ video.subject }}</span>{% endif %}
-                                </div>
-                            </div>
-                            <a href="{{ video.url }}" target="_blank" class="download-btn" style="background-color: #e74c3c;">🎬 Watch Video</a>
-                        </li>
-                    {% endfor %}
-                </ul>
             </div>
             {% endif %}
         </div>
-        {% endif %}
     </div>
 
     <script>

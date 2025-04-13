@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activities - MES Resource Portal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #3b82f6;
+            --accent: #f97316;
+            --light: #f1f5f9;
+            --dark: #0f172a;
+            --success: #10b981;
+            --white: #ffffff;
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.15);
+            --cultural: #6f42c1;
+            --sports: #28a745;
+            --academic: #fd7e14;
+            --other: #17a2b8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            color: var(--dark);
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* 3D Floating Elements */
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .shape {
+            position: absolute;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            border-radius: 50%;
+            opacity: 0.1;
+            filter: blur(5px);
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .shape:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 20s;
+        }
+        
+        .shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            left: 70%;
+            animation-delay: 5s;
+            animation-duration: 25s;
+        }
+        
+        .shape:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            top: 30%;
+            left: 80%;
+            animation-delay: 10s;
+            animation-duration: 18s;
+        }
+        
+        .shape:nth-child(4) {
+            width: 180px;
+            height: 180px;
+            top: 70%;
+            left: 20%;
+            animation-delay: 15s;
+            animation-duration: 22s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(100px, 50px) rotate(180deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: linear-gradient(45deg, transparent 65%, rgba(255, 255, 255, 0.2) 75%, transparent 85%);
+            animation: shine 5s infinite linear;
+        }
+        
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) rotate(45deg);
+            }
+        }
+        
+        /* Navigation */
+        .nav-menu {
+            background-color: var(--white);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .nav-menu a {
+            color: var(--primary);
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-menu a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .nav-menu a:hover::before {
+            width: 100%;
+        }
+        
+        .activities-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .page-header {
+            background-color: var(--white);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .page-header h2 {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            outline: none;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+        
+        .btn-danger {
+            background-color: #dc3545;
+            color: var(--white);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .activity-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .activity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .activity-header {
+            padding: 20px;
+            color: var(--white);
+        }
+        
+        .cultural {
+            background: linear-gradient(135deg, var(--cultural), darken(var(--cultural), 20%));
+        }
+        
+        .sports {
+            background: linear-gradient(135deg, var(--sports), darken(var(--sports), 20%));
+        }
+        
+        .academic {
+            background: linear-gradient(135deg, var(--academic), darken(var(--academic), 20%));
+        }
+        
+        .other {
+            background: linear-gradient(135deg, var(--other), darken(var(--other), 20%));
+        }
+        
+        .activity-header h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .activity-date {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .activity-body {
+            padding: 20px;
+            flex-grow: 1;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .badge-cultural {
+            background-color: var(--cultural);
+            color: var(--white);
+        }
+        
+        .badge-sports {
+            background-color: var(--sports);
+            color: var(--white);
+        }
+        
+        .badge-academic {
+            background-color: var(--academic);
+            color: var(--white);
+        }
+        
+        .badge-other {
+            background-color: var(--other);
+            color: var(--white);
+        }
+        
+        .no-activities {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .no-activities i {
+            font-size: 5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+        
+        .no-activities h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .no-activities p {
+            color: #666;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .activity-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .action-buttons a {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .activity-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .activity-header h4 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Shapes -->
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <header>MES COLLEGE ACTIVITIES & EVENTS</header>
+    
+    <nav class="nav-menu">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('programs') }}">Programs</a>
+        <a href="{{ url_for('resources') }}">Resources</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+        {% if 'teacher_id' in session %}
+        <a href="{{ url_for('teacher_dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('teacher_logout') }}" style="color: #dc3545;">Logout</a>
+        {% elif 'student_id' in session %}
+        <a href="{{ url_for('student_dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('logout_student') }}" style="color: #dc3545;">Logout</a>
+        {% endif %}
+    </nav>
+
+    <div class="activities-container">
+        <div class="page-header">
+            <h2><i class="fas fa-calendar-alt"></i> Campus Activities & Events</h2>
+            <p>Stay updated with all upcoming events and activities at MES College</p>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="action-buttons">
+            {% if 'teacher_id' in session %}
+            <a href="{{ url_for('teacher_dashboard') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Teacher Dashboard
+            </a>
+            <a href="{{ url_for('add_activity') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add New Activity
+            </a>
+            {% elif 'student_id' in session %}
+            <a href="{{ url_for('student_dashboard') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Student Dashboard
+            </a>
+            {% else %}
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+            {% endif %}
+        </div>
+
+        {% if activities %}
+            <div class="activity-grid">
+                {% for activity in activities %}
+                    <div class="activity-card">
+                        <div class="activity-header {{ activity.type.lower() }}">
+                            <h4>{{ activity.name }}</h4>
+                            <div class="activity-date">
+                                <i class="fas fa-calendar-day"></i> {{ activity.date }}
+                            </div>
+                        </div>
+                        <div class="activity-body">
+                            <span class="badge badge-{{ activity.type.lower() }}">{{ activity.type }}</span>
+                            
+                            {% if activity.description %}
+                                <p>{{ activity.description }}</p>
+                            {% else %}
+                                <p class="text-muted">No description provided.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-activities">
+                <i class="fas fa-calendar-times"></i>
+                <h3>No activities scheduled at this time</h3>
+                <p>Check back later for upcoming events or contact the administration for more information.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html> 

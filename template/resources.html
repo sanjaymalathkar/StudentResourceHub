@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resources - MES College Student Resource Hub</title>
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Resources Page Specific Styles */
+    .resources-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: var(--white);
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .resources-hero-title {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .resources-hero-subtitle {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .resources-content {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+    
+    .resource-categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .category-card {
+      background-color: var(--white);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .category-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .category-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: var(--white);
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+    
+    .category-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .category-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .category-desc {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    
+    .category-content {
+      padding: 1.5rem;
+    }
+    
+    .resource-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .resource-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .resource-item:last-child {
+      border-bottom: none;
+    }
+    
+    .resource-icon {
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+    
+    .resource-link {
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      flex: 1;
+    }
+    
+    .resource-link:hover {
+      color: var(--primary);
+    }
+    
+    .category-footer {
+      padding: 1rem 1.5rem;
+      background-color: #f8fafc;
+      text-align: center;
+    }
+    
+    .view-all {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      display: inline-block;
+    }
+    
+    .view-all:hover {
+      color: var(--accent);
+    }
+    
+    .view-all::after {
+      content: ' →';
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    
+    .view-all:hover::after {
+      transform: translateX(5px);
+    }
+    
+    .resource-finder {
+      background-color: #f8fafc;
+      padding: 3rem 2rem;
+      border-radius: 10px;
+      margin: 3rem 0;
+    }
+    
+    .resource-finder-title {
+      font-size: 1.8rem;
+      color: var(--dark);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .resource-search-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .form-group {
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .form-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--dark);
+    }
+    
+    .form-select, .form-input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+      font-size: 1rem;
+      background-color: var(--white);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .form-select:focus, .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+      outline: none;
+    }
+    
+    .form-button {
+      background-color: var(--primary);
+      color: var(--white);
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    
+    .form-button:hover {
+      background-color: var(--accent);
+      transform: translateY(-3px);
+    }
+    
+    .featured-resources {
+      margin: 4rem 0;
+    }
+    
+    .featured-title {
+      font-size: 2rem;
+      color: var(--dark);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .featured-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .featured-card {
+      background-color: var(--white);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.3s ease;
+    }
+    
+    .featured-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .featured-image {
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .featured-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .featured-card:hover .featured-image img {
+      transform: scale(1.1);
+    }
+    
+    .featured-content {
+      padding: 1.5rem;
+    }
+    
+    .featured-resource-title {
+      font-size: 1.3rem;
+      color: var(--dark);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    
+    .featured-desc {
+      color: #64748b;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    
+    .featured-meta {
+      display: flex;
+      justify-content: space-between;
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+    
+    .featured-type {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      background-color: rgba(59, 130, 246, 0.1);
+      color: var(--primary);
+      border-radius: 50px;
+      font-weight: 600;
+    }
+    
+    .resource-access {
+      display: flex;
+      justify-content: center;
+      padding: 3rem 2rem;
+      background-color: #f8fafc;
+      border-radius: 10px;
+      margin: 3rem 0;
+    }
+    
+    .access-card {
+      flex: 1;
+      max-width: 300px;
+      text-align: center;
+      padding: 2rem;
+      background-color: var(--white);
+      border-radius: 10px;
+      box-shadow: var(--shadow-md);
+      margin: 0 1rem;
+    }
+    
+    .access-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+    
+    .access-title {
+      font-size: 1.3rem;
+      color: var(--dark);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    
+    .access-desc {
+      color: #64748b;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    
+    .access-btn {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background-color: var(--primary);
+      color: var(--white);
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    
+    .access-btn:hover {
+      background-color: var(--accent);
+      transform: translateY(-3px);
+    }
+    
+    @media (max-width: 768px) {
+      .resource-categories {
+        grid-template-columns: 1fr;
+      }
+      
+      .featured-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .resource-access {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
+      
+      .access-card {
+        margin: 0;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Background Shapes -->
+  <div class="floating-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+
+  <header>MES COLLEGE STUDENT RESOURCE HUB</header>
+  
+  <!-- Mobile Menu Toggle -->
+  <div class="menu-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <nav class="nav-menu">
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('about') }}">About</a>
+    <a href="{{ url_for('programs') }}">Programs</a>
+    <a href="{{ url_for('admissions') }}">Admissions</a>
+    <a href="{{ url_for('resources') }}">Resources</a>
+    <a href="{{ url_for('contact') }}">Contact</a>
+  </nav>
+
+  <!-- Resources Hero Section -->
+  <section class="resources-hero">
+    <h1 class="resources-hero-title">Student Resources</h1>
+    <p class="resources-hero-subtitle">Access a comprehensive collection of learning materials, research tools, and academic support resources to enhance your educational journey.</p>
+  </section>
+
+  <!-- Resource Finder Section -->
+  <section class="resource-finder">
+    <h2 class="resource-finder-title">Find Resources</h2>
+    <form class="resource-search-form">
+      <div class="form-group">
+        <label for="course" class="form-label">Course</label>
+        <select id="course" name="course" class="form-select">
+          <option value="" selected disabled>Select Course</option>
+          <option value="BCA">BCA</option>
+          <option value="BBA">BBA</option>
+          <option value="BCOM">BCOM</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="year" class="form-label">Year</label>
+        <select id="year" name="year" class="form-select">
+          <option value="" selected disabled>Select Year</option>
+          <option value="1st Year">1st Year</option>
+          <option value="2nd Year">2nd Year</option>
+          <option value="3rd Year">3rd Year</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="module" class="form-label">Module</label>
+        <select id="module" name="module" class="form-select">
+          <option value="all" selected>All Modules</option>
+        </select>
+      </div>
+      
+      <button type="submit" class="form-button">Search Resources</button>
+    </form>
+  </section>
+
+  <!-- Resources Content -->
+  <div class="resources-content">
+    <!-- Resource Categories -->
+    <section class="resource-categories">
+      <div class="category-card">
+        <div class="category-header">
+          <div class="category-icon">
+            <i class="fas fa-book"></i>
+          </div>
+          <h2 class="category-title">Course Materials</h2>
+          <p class="category-desc">Lecture notes, presentations, and study guides</p>
+        </div>
+        <div class="category-content">
+          <ul class="resource-list">
+            <li class="resource-item">
+              <span class="resource-icon"><i class="fas fa-file-pdf"></i></span>
+              <a href="#" class="resource-link">Introduction to Programming Concepts</a>
+            </li>
+            <li class="resource-item">
+              <span class="resource-icon"><i class="fas fa-file-powerpoint"></i></span>
+              <a href="#" class="resource-link">Database Management Systems</a>
+            </li>
+            <li class="resource-item">
+              <span class="resource-icon"><i class="fas fa-file-word"></i></span>
+              <a href="#" class="resource-link">Financial Accounting Principles</a>
+            </li>
+            <li class="resource-item">
+              <span class="resource-icon"><i class="fas fa-file-pdf"></i></span>
+              <a href="#" class="resource-link">Marketing Management Strategies</a>
+            </li>
+          </ul>
+        </div>
+        <div class="category-footer">
+          <a href="{{ url_for('student_dashboard') }}" class="view-all">View All Course Materials</a>
+        </div>
+      </div>
+      
+      <div class="category-card">
+        <div class="category-header" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);">
+          <div class="category-icon">
+            <i class="fas fa-file-alt"></i>
+          </div>
+          <h2 class="category-title">Question Papers</h2>
+          <p class="category-desc">Previous year question papers and sample tests</p>
+        </div>
+        <div class="category-content">
+          <ul class="resource-list">
+            <li class="resource-item">
+              <span class="resource-icon"><i class="fas fa-file-pdf"></i></span>
+              <a href="#" class="resource-link">BCA Semester 1 - 2024 Papers</a>
+            </li>
+            <li class="resource-item">
+              <span class="resource-icon"><i class="fas fa-file-pdf"></i></span>
+              <a href="#" class="resource-link">BBA Semester 2 - 2023 Papers</a>
+            </li>
+            <li class="resource-item">
+              <span class="resource-icon"><i class="fas fa-file-pdf"></i></span>
+              <a href="#" class="resource-link">BCOM Taxation - 2024 Papers</a>
+            </li>
+            <li class="resource-item">
+              <span class="resource-icon"><i class="fas fa-file-pdf"></i></span>
+              <a href="#" class="resource-link">BCA Data Structures - Model Papers</a>
+            </li>
+          </ul>
+        </div>
+        <div class="category-footer">
+          <a href="{{ url_for('student_dashboard') }}" class="view-all">View All Question Papers</a>
+        </div>
+      </div>
+      
+      <div class="category-card">
+        <div class="category-header" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
+          <div class="category-icon">
+            <i class="fab fa-youtube"></i>
+          </div>
+          <h2 class="category-title">Video Tutorials</h2>
+          <p class="category-desc">Educational videos and lecture recordings</p>
+        </div>
+        <div class="category-content">
+          <ul class="resource-list">
+            <li class="resource-item">
+              <span class="resource-icon"><i class="fab fa-youtube"></i></span>
+              <a href="#" class="resource-link">Python Programming Basics</a>
+            </li>
+            <li class="resource-item">
+              <span class="resource-icon"><i class="fab fa-youtube"></i></span>
+              <a href="#" class="resource-link">Business Communication Skills</a>
+            </li>
+            <li class="resource-item">
+              <span class="resource-icon"><i class="fab fa-youtube"></i></span>
+              <a href="#" class="resource-link">Financial Statement Analysis</a>
+            </li>
+            <li class="resource-item">
+              <span class="resource-icon"><i class="fab fa-youtube"></i></span>
+              <a href="#" class="resource-link">Web Development Tutorial Series</a>
+            </li>
+          </ul>
+        </div>
+        <div class="category-footer">
+          <a href="{{ url_for('student_dashboard') }}" class="view-all">View All Video Tutorials</a>
+        </div>
+      </div>
+      
+      <div class="category-card">
+        <div class="category-header" style="background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);">
+          <div class="category-icon">
+            <i class="fas fa-book-open"></i>
+          </div>
+          <h2 class="category-title">Reference Books</h2>
+          <p class="category-desc">Recommended textbooks and reading materials</p>
+        </div>
+        <div class="category-content">
+          <ul class="resource-list">
+            <li class="resource-item">
+              <span class="resource-icon"><i class="fas fa-book"></i></span>
+              <a href="#" class="resource-link">Computer Networks by Andrew S. Tanenbaum</a>
+            </li>
+            <li class="resource-item">
+              <span class="resource-icon"><i class="fas fa-book"></i></span>
+              <a href="#" class="resource-link">Principles of Marketing by Philip Kotler</a>
+            </li>
+            <li class="resource-item">
+              <span class="resource-icon"><i class="fas fa-book"></i></span>
+              <a href="#" class="resource-link">Financial Management by Prasanna Chandra</a>
+            </li>
+            <li class="resource-item">
+              <span class="resource-icon"><i class="fas fa-book"></i></span>
+              <a href="#" class="resource-link">Data Structures Using C by Reema Thareja</a>
+            </li>
+          </ul>
+        </div>
+        <div class="category-footer">
+          <a href="{{ url_for('view_reference_books') }}" class="view-all">View All Reference Books</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Resources Section -->
+    <section class="featured-resources">
+      <h2 class="featured-title">Featured Resources</h2>
+      <div class="featured-container">
+        <div class="featured-card">
+          <div class="featured-image">
+            <img src="/static/images/resource1.jpg" alt="Programming Resource" onerror="this.src='https://via.placeholder.com/400x200?text=Programming+Resource'">
+          </div>
+          <div class="featured-content">
+            <h3 class="featured-resource-title">Complete Python Programming Guide</h3>
+            <p class="featured-desc">A comprehensive guide covering Python basics to advanced topics including data structures, object-oriented programming, and web development frameworks.</p>
+            <div class="featured-meta">
+              <span class="featured-type">Course Material</span>
+              <span class="featured-date">Added: May 15, 2025</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="featured-card">
+          <div class="featured-image">
+            <img src="/static/images/resource2.jpg" alt="Business Resource" onerror="this.src='https://via.placeholder.com/400x200?text=Business+Resource'">
+          </div>
+          <div class="featured-content">
+            <h3 class="featured-resource-title">Business Analytics Case Studies</h3>
+            <p class="featured-desc">Collection of real-world business analytics case studies from various industries, demonstrating practical applications of data-driven decision making.</p>
+            <div class="featured-meta">
+              <span class="featured-type">Case Study</span>
+              <span class="featured-date">Added: June 2, 2025</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="featured-card">
+          <div class="featured-image">
+            <img src="/static/images/resource3.jpg" alt="Commerce Resource" onerror="this.src='https://via.placeholder.com/400x200?text=Commerce+Resource'">
+          </div>
+          <div class="featured-content">
+            <h3 class="featured-resource-title">Financial Accounting Interactive Workbook</h3>
+            <p class="featured-desc">Interactive workbook with practice problems, solutions, and step-by-step guides for mastering financial accounting principles and statements.</p>
+            <div class="featured-meta">
+              <span class="featured-type">Workbook</span>
+              <span class="featured-date">Added: April 20, 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resource Access Section -->
+    <section class="resource-access">
+      <div class="access-card">
+        <div class="access-icon">
+          <i class="fas fa-user-graduate"></i>
+        </div>
+        <h3 class="access-title">Student Portal</h3>
+        <p class="access-desc">Access course-specific resources, submit assignments, and track your academic progress through our dedicated student portal.</p>
+        <a href="{{ url_for('student_login') }}" class="access-btn">Student Login</a>
+      </div>
+      
+      <div class="access-card">
+        <div class="access-icon">
+          <i class="fas fa-chalkboard-teacher"></i>
+        </div>
+        <h3 class="access-title">Teacher Dashboard</h3>
+        <p class="access-desc">Faculty members can upload resources, manage course materials, and interact with students through our teacher dashboard.</p>
+        <a href="{{ url_for('teacher_login') }}" class="access-btn">Teacher Login</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">MES COLLEGE</div>
+        <p>Empowering students with knowledge, skills, and values for a successful future.</p>
+        <div class="social-icons">
+          <a href="#" class="social-icon">🔵</a>
+          <a href="#" class="social-icon">🐦</a>
+          <a href="#" class="social-icon">📷</a>
+          <a href="#" class="social-icon">🔴</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+          <li><a href="{{ url_for('about') }}">About Us</a></li>
+          <li><a href="{{ url_for('programs') }}">Programs</a></li>
+          <li><a href="{{ url_for('admissions') }}">Admissions</a></li>
+          <li><a href="{{ url_for('resources') }}">Resources</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3 class="footer-title">Contact Us</h3>
+        <div class="contact-info">
+          <span class="contact-icon">📍</span>
+          <span>123 Education Blvd, University City</span>
+        </div>
+        <div class="contact-info">
+          <span class="contact-icon">📞</span>
+          <span>+1 234 567 8900</span>
+        </div>
+        <div class="contact-info">
+          <span class="contact-icon">✉️</span>
+          <span>info@mescollege.edu</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      &copy; 2025 MES College | All Rights Reserved
+    </div>
+  </footer>
+
+  <script>
+    // Toggle mobile menu
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+    
+    // Dynamic modules based on course and year selection
+    const courseSelect = document.getElementById('course');
+    const yearSelect = document.getElementById('year');
+    const moduleSelect = document.getElementById('module');
+    
+    function updateModules() {
+      // Only proceed if both course and year are selected
+      if (!courseSelect.value || !yearSelect.value) return;
+      
+      // In a real implementation, this would fetch modules from the server
+      // For demo purposes, we'll add some static options
+      moduleSelect.innerHTML = '<option value="all">All Modules</option>';
+      
+      if (courseSelect.value === 'BCA') {
+        if (yearSelect.value === '1st Year') {
+          addOption('Computer Fundamentals');
+          addOption('Programming in C');
+          addOption('Mathematics');
+        } else if (yearSelect.value === '2nd Year') {
+          addOption('Data Structures');
+          addOption('Database Management');
+          addOption('Object-Oriented Programming');
+        } else if (yearSelect.value === '3rd Year') {
+          addOption('Web Development');
+          addOption('Software Engineering');
+          addOption('Mobile Application Development');
+        }
+      } else if (courseSelect.value === 'BBA') {
+        if (yearSelect.value === '1st Year') {
+          addOption('Business Communication');
+          addOption('Accounting Basics');
+          addOption('Economic Principles');
+        } else if (yearSelect.value === '2nd Year') {
+          addOption('Marketing Management');
+          addOption('Human Resources');
+          addOption('Financial Management');
+        } else if (yearSelect.value === '3rd Year') {
+          addOption('Strategic Management');
+          addOption('Business Analytics');
+          addOption('Entrepreneurship');
+        }
+      } else if (courseSelect.value === 'BCOM') {
+        if (yearSelect.value === '1st Year') {
+          addOption('Financial Accounting');
+          addOption('Business Law');
+          addOption('Economics');
+        } else if (yearSelect.value === '2nd Year') {
+          addOption('Cost Accounting');
+          addOption('Corporate Accounting');
+          addOption('Business Statistics');
+        } else if (yearSelect.value === '3rd Year') {
+          addOption('Taxation');
+          addOption('Auditing');
+          addOption('Banking and Insurance');
+        }
+      }
+    }
+    
+    function addOption(text) {
+      const option = document.createElement('option');
+      option.value = text;
+      option.textContent = text;
+      moduleSelect.appendChild(option);
+    }
+    
+    courseSelect.addEventListener('change', updateModules);
+    yearSelect.addEventListener('change', updateModules);
+  </script>
+</body>
+</html>

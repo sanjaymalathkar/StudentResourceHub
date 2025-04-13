@@ -3,51 +3,286 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Take Attendance</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/attend.css') }}">
+    <title>Attendance Management</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 24px;
+        }
+        
+        .nav-links a {
+            margin-left: 15px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .date-selector {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .date-selector form {
+            display: flex;
+            align-items: center;
+        }
+        
+        .date-selector input[type="date"] {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        
+        .date-selector button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .date-selector button:hover {
+            background-color: #2980b9;
+        }
+        
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+        
+        .flash-message {
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        
+        .flash-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .flash-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .flash-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+        
+        .attendance-form {
+            margin-top: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .attendance-options {
+            display: flex;
+        }
+        
+        .attendance-options label {
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .attendance-options input[type="radio"] {
+            margin-right: 5px;
+        }
+        
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+        
+        .no-students {
+            text-align: center;
+            padding: 30px;
+            color: #6c757d;
+            font-style: italic;
+        }
+        
+        .roll-number {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        
+        /* Present/Absent styling */
+        .status-present {
+            color: #28a745;
+            font-weight: 600;
+        }
+        
+        .status-absent {
+            color: #dc3545;
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
-    <h2>Take Attendance</h2>
-
-    <form action="{{ url_for('take_attendance') }}" method="POST">
-        <!-- Auto-fill date -->
-        <label>Date:</label>
-        <input type="date" name="date" id="dateField" required>
-
-        <h3>Students List</h3>
-<table border="1">
-    <tr>
-        <th>Student Name</th>
-        <th>Roll Number</th>
-        <th>Mark Attendance</th>
-        <th>Last 5 Days Attendance</th>
-    </tr>
-    {% for student in students %}
-    <tr>
-        <td>{{ student.fullname }}</td>
-        <td>{{ student.roll_number }}</td>
-        <td>
-            <input type="checkbox" name="attendance" value="{{ student.roll_number }}">
-        </td>
-        <td>
-            {% if student.roll_number in attendance_history %}
-                {% for record in attendance_history[student.roll_number] %}
-                    <span>{{ record[0] }}: <strong>{{ record[1] }}</strong></span><br>
-                {% endfor %}
-            {% else %}
-                <span>No history</span>
+    <div class="container">
+        <header>
+            <h1>Attendance Management</h1>
+            <div class="nav-links">
+                <a href="{{ url_for('teacher_dashboard') }}">Back to Dashboard</a>
+            </div>
+        </header>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
             {% endif %}
-        </td>
-    </tr>
-    {% endfor %}
-</table>
-        <br>
-        <button type="submit">Submit Attendance</button>
-    </form>
-
+        {% endwith %}
+        
+        <div class="date-selector">
+            <form action="{{ url_for('take_attendance') }}" method="GET">
+                <input type="date" name="date" value="{{ attendance_date }}" id="attendanceDate">
+                <button type="submit">View Attendance</button>
+            </form>
+        </div>
+        
+        {% if excel_file %}
+        <div style="margin: 20px 0; padding: 15px; background-color: #e8f5e9; border-radius: 8px; border-left: 5px solid #4CAF50;">
+            <h3 style="margin-bottom: 10px; color: #2E7D32;">Attendance Excel File Created</h3>
+            <p style="margin-bottom: 15px;">The attendance data has been successfully exported to Excel.</p>
+            <div style="display: flex; gap: 10px;">
+                <a href="{{ url_for('download_attendance', filename=excel_file) }}" 
+                   style="display: inline-block; padding: 8px 16px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px; font-weight: 500;">
+                    <i style="margin-right: 5px;">📥</i> Download Excel File
+                </a>
+                <a href="{{ url_for('attendance_records') }}"
+                   style="display: inline-block; padding: 8px 16px; background-color: #2196F3; color: white; text-decoration: none; border-radius: 4px; font-weight: 500;">
+                    <i style="margin-right: 5px;">📋</i> View All Records
+                </a>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if students %}
+            <form action="{{ url_for('take_attendance') }}" method="POST" class="attendance-form">
+                <input type="hidden" name="date" value="{{ attendance_date }}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Roll Number</th>
+                            <th>Attendance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in students %}
+                            <tr>
+                                <td>{{ student.fullname }}</td>
+                                <td class="roll-number">{{ student.roll_number }}</td>
+                                <td>
+                                    <input type="hidden" name="student_id" value="{{ student.id }}">
+                                    <div class="attendance-options">
+                                        <label>
+                                            <input type="radio" name="attendance_status_{{ student.id }}" value="Present" 
+                                                {% if student.id in attendance_records and attendance_records[student.id] == "Present" %}checked{% endif %}>
+                                            <span class="status-present">Present</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="attendance_status_{{ student.id }}" value="Absent"
+                                                {% if student.id in attendance_records and attendance_records[student.id] == "Absent" %}checked{% endif %}
+                                                {% if student.id not in attendance_records %}checked{% endif %}>
+                                            <span class="status-absent">Absent</span>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button type="submit" class="submit-btn">Save Attendance</button>
+            </form>
+        {% else %}
+            <div class="no-students">
+                <p>No students found. Please add students first.</p>
+            </div>
+        {% endif %}
+    </div>
+    
     <script>
-        // Auto-set today's date
-        document.getElementById('dateField').valueAsDate = new Date();
+        // Set today's date as default if not specified
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.getElementById('attendanceDate');
+            if (!dateInput.value) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.value = today;
+            }
+        });
     </script>
 </body>
 </html>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/teacherdash.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
         table {
@@ -43,19 +44,29 @@
     </style>
 </head>
 <body>
+    <!-- Floating Background Shapes -->
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
     <header>
         <h1>Teacher Dashboard</h1>
-        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        <a href="{{ url_for('teacher_logout') }}" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
     </header>
 
     <nav class="sidebar">
         <ul>
-            <li><a href="#upload-resources"><i class="fas fa-upload"></i> Upload Resources</a></li>
-            <li><a href="#upload-notes"><i class="fas fa-file-alt"></i> Upload Notes</a></li>
-            <li><a href="#attendance"><i class="fas fa-user-check"></i> Take Attendance</a></li>
-            <li><a href="#activities"><i class="fas fa-running"></i> Cultural & Sports</a></li>
-            <li><a href="#library"><i class="fas fa-book"></i> Library</a></li>
-            <li><a href="#youtube"><i class="fab fa-youtube"></i> YouTube References</a></li>
+            <li><a href="#upload-resources"><i class="fas fa-upload"></i> <span>Upload Resources</span></a></li>
+            <li><a href="#upload-notes"><i class="fas fa-file-alt"></i> <span>Upload Notes</span></a></li>
+            <li><a href="#attendance"><i class="fas fa-user-check"></i> <span>Take Attendance</span></a></li>
+            <li><a href="#activities"><i class="fas fa-running"></i> <span>Cultural & Sports</span></a></li>
+            <li><a href="#library"><i class="fas fa-book"></i> <span>Library</span></a></li>
+            <li><a href="#youtube"><i class="fab fa-youtube"></i> <span>YouTube References</span></a></li>
         </ul>
     </nav>
 
@@ -233,7 +244,7 @@
        <!-- Add Student Form -->
         <section id="add-student">
             <h2>Add Student</h2>
-            <form action="{{ url_for('create_student') }}" method="POST">
+            <form action="{{ url_for('add_student') }}" method="POST">
                 <label>Name:</label>
                 <input type="text" name="student_fullname" required>
 
@@ -247,11 +258,11 @@
 
         <section id="attendance">
             <h2>Take Attendance</h2>
-            <form action="{{ url_for('take_attendance') }}" method="POST">
-
-        
-                <button type="submit">Mark Attendance</button>
-            </form>
+            <p>Manage student attendance by marking students as present or absent.</p>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <a href="{{ url_for('take_attendance') }}" class="btn" style="text-decoration: none; background-color: #4CAF50; color: white; padding: 10px 15px; border-radius: 4px;">Take Attendance</a>
+                <a href="{{ url_for('attendance_records') }}" class="btn" style="text-decoration: none; background-color: #2196F3; color: white; padding: 10px 15px; border-radius: 4px;">View Attendance Records</a>
+            </div>
         </section>
         
         
@@ -261,36 +272,93 @@
             <h2>Cultural & Sports Activities</h2>
             <form action="{{ url_for('add_activity') }}" method="POST">
                 <label>Activity Name:</label>
-                <input type="text" name="activity_name" required>
+                <input type="text" name="activity_name" required placeholder="Enter activity name">
 
                 <label>Date:</label>
                 <input type="date" name="activity_date" required>
+                
+                <label>Activity Type:</label>
+                <select name="activity_type" required>
+                    <option value="Cultural">Cultural</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Academic">Academic</option>
+                    <option value="Other">Other</option>
+                </select>
+                
+                <label>Description:</label>
+                <textarea name="activity_description" placeholder="Describe the activity details, venue, timing, etc." rows="3"></textarea>
 
                 <button type="submit">Add Activity</button>
             </form>
+            
+            <div style="margin-top: 20px;">
+                <a href="{{ url_for('view_activities') }}" class="btn" style="display: inline-block; margin-top: 10px; text-decoration: none; background-color: #4CAF50; color: white; padding: 10px 15px; border-radius: 4px;">View All Activities</a>
+            </div>
         </section>
 
         <!-- Library Section -->
         <section id="library">
-            <h2>Library - Referred Books</h2>
-            <ul>
-                <li>Book 1 - Author Name</li>
-                <li>Book 2 - Author Name</li>
-                <li>Book 3 - Author Name</li>
-            </ul>
+            <h2>Library - Reference Books</h2>
+            <form action="{{ url_for('add_reference_book') }}" method="POST">
+                <label>Book Title:</label>
+                <input type="text" name="book_title" required placeholder="Enter book title">
+
+                <label>Author:</label>
+                <input type="text" name="book_author" required placeholder="Enter author name">
+                
+                <label>Course:</label>
+                <input type="text" name="course" required placeholder="Enter course (e.g., BBA)">
+                
+                <label>Year:</label>
+                <select name="year" required>
+                    <option value="">-- Select Year --</option>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                </select>
+                
+                <label>Module:</label>
+                <input type="text" name="module" placeholder="Enter module (optional)">
+                
+                <label>Subject:</label>
+                <input type="text" name="subject" required placeholder="Enter subject">
+                
+                <label>Description:</label>
+                <textarea name="description" placeholder="Enter book description, edition details, etc." rows="3"></textarea>
+                
+                <button type="submit">Add Reference Book</button>
+            </form>
+            
+            <div style="margin-top: 20px;">
+                <a href="{{ url_for('view_reference_books') }}" class="btn" style="display: inline-block; margin-top: 10px; text-decoration: none; background-color: #4CAF50; color: white; padding: 10px 15px; border-radius: 4px;">View All Reference Books</a>
+            </div>
         </section>
 
         <!-- YouTube References -->
         <section id="youtube">
-            <h2>Upload YouTube Reference</h2>
+            <h2>YouTube References</h2>
             <form action="{{ url_for('upload_youtube') }}" method="POST">
                 <label>Subject:</label>
-                <input type="text" name="subject" required>
+                <input type="text" name="subject" required placeholder="Enter subject name">
+
+                <label>Course:</label>
+                <input type="text" name="course" required placeholder="Enter course (e.g., BBA)">
+                
+                <label>Year:</label>
+                <select name="year" required>
+                    <option value="">-- Select Year --</option>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                </select>
+                
+                <label>Module:</label>
+                <input type="text" name="module" placeholder="Enter module (optional)">
 
                 <label>YouTube Link:</label>
-                <input type="url" name="youtube_link" required>
+                <input type="url" name="youtube_link" required placeholder="https://www.youtube.com/watch?v=...">
 
-                <button type="submit">Upload</button>
+                <button type="submit">Add Reference</button>
             </form>
         </section>
     </main>

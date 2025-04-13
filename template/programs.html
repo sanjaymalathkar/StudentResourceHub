@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programs - MES College Student Resource Hub</title>
+  <link rel="stylesheet" href="/static/css/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Programs Page Specific Styles */
+    .program-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: var(--white);
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .program-hero-title {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .program-hero-subtitle {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .program-categories {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .program-category {
+      background-color: var(--white);
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      flex: 1;
+      min-width: 300px;
+      max-width: 350px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .program-category:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .category-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+    
+    .category-title {
+      font-size: 1.5rem;
+      color: var(--dark);
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+    
+    .category-desc {
+      color: #64748b;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    
+    .program-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+    }
+    
+    .program-item {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .program-item:last-child {
+      border-bottom: none;
+    }
+    
+    .program-link {
+      display: block;
+      color: var(--primary);
+      text-decoration: none;
+      position: relative;
+      padding-right: 1.5rem;
+      transition: color 0.3s ease;
+    }
+    
+    .program-link:hover {
+      color: var(--accent);
+    }
+    
+    .program-link::after {
+      content: '→';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    
+    .program-link:hover::after {
+      opacity: 1;
+      transform: translate(5px, -50%);
+    }
+    
+    .view-all-btn {
+      display: inline-block;
+      background-color: var(--primary);
+      color: var(--white);
+      padding: 0.8rem 1.5rem;
+      border-radius: 5px;
+      margin-top: 1.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    
+    .view-all-btn:hover {
+      background-color: var(--accent);
+      transform: translateY(-3px);
+    }
+    
+    .program-description {
+      background-color: #f8fafc;
+      padding: 4rem 2rem;
+    }
+    
+    .description-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .description-title {
+      font-size: 2rem;
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+    }
+    
+    .description-text {
+      color: #64748b;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    
+    .features-section {
+      padding: 4rem 2rem;
+      background-color: var(--white);
+    }
+    
+    .features-title {
+      text-align: center;
+      font-size: 2rem;
+      color: var(--dark);
+      margin-bottom: 3rem;
+    }
+    
+    .features-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .feature-item {
+      flex: 1;
+      min-width: 250px;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      background-color: rgba(59, 130, 246, 0.1);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+    
+    .feature-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--dark);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    
+    .feature-text {
+      text-align: center;
+      color: #64748b;
+      line-height: 1.6;
+    }
+    
+    @media (max-width: 768px) {
+      .program-category {
+        min-width: 100%;
+      }
+      
+      .feature-item {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Background Shapes -->
+  <div class="floating-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+
+  <header>MES COLLEGE STUDENT RESOURCE HUB</header>
+  
+  <!-- Mobile Menu Toggle -->
+  <div class="menu-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <nav class="nav-menu">
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('about') }}">About</a>
+    <a href="{{ url_for('programs') }}">Programs</a>
+    <a href="{{ url_for('admissions') }}">Admissions</a>
+    <a href="{{ url_for('resources') }}">Resources</a>
+    <a href="{{ url_for('contact') }}">Contact</a>
+  </nav>
+
+  <!-- Programs Hero Section -->
+  <section class="program-hero">
+    <h1 class="program-hero-title">Our Academic Programs</h1>
+    <p class="program-hero-subtitle">Discover a wide range of undergraduate and graduate programs designed to prepare you for success in today's competitive world.</p>
+  </section>
+
+  <!-- Program Categories Section -->
+  <section class="program-categories">
+    <div class="program-category">
+      <div class="category-icon">
+        <i class="fas fa-laptop-code"></i>
+      </div>
+      <h2 class="category-title">Computer Science</h2>
+      <p class="category-desc">Cutting-edge programs in computer science, information technology, and related fields.</p>
+      <ul class="program-list">
+        <li class="program-item"><a href="#" class="program-link">Bachelor of Computer Applications (BCA)</a></li>
+        <li class="program-item"><a href="#" class="program-link">BSc Computer Science</a></li>
+        <li class="program-item"><a href="#" class="program-link">BSc Information Technology</a></li>
+        <li class="program-item"><a href="#" class="program-link">MSc Computer Science</a></li>
+      </ul>
+      <a href="#" class="view-all-btn">View All Programs</a>
+    </div>
+    
+    <div class="program-category">
+      <div class="category-icon">
+        <i class="fas fa-chart-line"></i>
+      </div>
+      <h2 class="category-title">Business & Management</h2>
+      <p class="category-desc">Comprehensive business programs that blend theory with practical applications.</p>
+      <ul class="program-list">
+        <li class="program-item"><a href="#" class="program-link">Bachelor of Business Administration (BBA)</a></li>
+        <li class="program-item"><a href="#" class="program-link">BCom (Finance)</a></li>
+        <li class="program-item"><a href="#" class="program-link">BCom (Accounting)</a></li>
+        <li class="program-item"><a href="#" class="program-link">MBA (Various Specializations)</a></li>
+      </ul>
+      <a href="#" class="view-all-btn">View All Programs</a>
+    </div>
+    
+    <div class="program-category">
+      <div class="category-icon">
+        <i class="fas fa-flask"></i>
+      </div>
+      <h2 class="category-title">Science & Technology</h2>
+      <p class="category-desc">Innovative programs in natural and applied sciences for future researchers.</p>
+      <ul class="program-list">
+        <li class="program-item"><a href="#" class="program-link">BSc Mathematics</a></li>
+        <li class="program-item"><a href="#" class="program-link">BSc Physics</a></li>
+        <li class="program-item"><a href="#" class="program-link">BSc Chemistry</a></li>
+        <li class="program-item"><a href="#" class="program-link">MSc Data Science</a></li>
+      </ul>
+      <a href="#" class="view-all-btn">View All Programs</a>
+    </div>
+  </section>
+
+  <!-- Program Description Section -->
+  <section class="program-description">
+    <div class="description-container">
+      <h2 class="description-title">World-Class Educational Experience</h2>
+      <p class="description-text">At MES College, we offer a diverse range of academic programs designed to provide students with the knowledge, skills, and experiences needed to excel in their chosen fields. Our curriculum is developed in consultation with industry experts to ensure that our graduates are well-prepared for the demands of the modern workplace.</p>
+      <p class="description-text">Our programs combine theoretical knowledge with practical applications, giving students hands-on experience through internships, project work, and industry collaborations. Our faculty members are experts in their fields, dedicated to providing mentorship and guidance to help students achieve their academic and career goals.</p>
+    </div>
+  </section>
+
+  <!-- Program Features Section -->
+  <section class="features-section">
+    <h2 class="features-title">What Makes Our Programs Exceptional</h2>
+    <div class="features-container">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fas fa-user-tie"></i>
+        </div>
+        <h3 class="feature-title">Industry-Aligned Curriculum</h3>
+        <p class="feature-text">Our programs are designed in collaboration with industry experts to ensure relevance and practical applicability.</p>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fas fa-chalkboard-teacher"></i>
+        </div>
+        <h3 class="feature-title">Experienced Faculty</h3>
+        <p class="feature-text">Learn from dedicated professors who bring years of academic and industry experience to the classroom.</p>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fas fa-hands-helping"></i>
+        </div>
+        <h3 class="feature-title">Placement Support</h3>
+        <p class="feature-text">Comprehensive career services including resume building, interview preparation, and job placement assistance.</p>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fas fa-globe"></i>
+        </div>
+        <h3 class="feature-title">Global Perspective</h3>
+        <p class="feature-text">International collaborations and exchange programs that expose students to global best practices.</p>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fas fa-microscope"></i>
+        </div>
+        <h3 class="feature-title">Research Opportunities</h3>
+        <p class="feature-text">Engage in cutting-edge research projects under the guidance of experienced faculty members.</p>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fas fa-laptop"></i>
+        </div>
+        <h3 class="feature-title">Modern Infrastructure</h3>
+        <p class="feature-text">State-of-the-art laboratories, libraries, and classrooms equipped with the latest technology.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">MES COLLEGE</div>
+        <p>Empowering students with knowledge, skills, and values for a successful future.</p>
+        <div class="social-icons">
+          <a href="#" class="social-icon">🔵</a>
+          <a href="#" class="social-icon">🐦</a>
+          <a href="#" class="social-icon">📷</a>
+          <a href="#" class="social-icon">🔴</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+          <li><a href="{{ url_for('about') }}">About Us</a></li>
+          <li><a href="{{ url_for('programs') }}">Programs</a></li>
+          <li><a href="{{ url_for('admissions') }}">Admissions</a></li>
+          <li><a href="{{ url_for('resources') }}">Resources</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3 class="footer-title">Contact Us</h3>
+        <div class="contact-info">
+          <span class="contact-icon">📍</span>
+          <span>123 Education Blvd, University City</span>
+        </div>
+        <div class="contact-info">
+          <span class="contact-icon">📞</span>
+          <span>+1 234 567 8900</span>
+        </div>
+        <div class="contact-info">
+          <span class="contact-icon">✉️</span>
+          <span>info@mescollege.edu</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      &copy; 2025 MES College | All Rights Reserved
+    </div>
+  </footer>
+
+  <script>
+    // Toggle mobile menu
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+  </script>
+</body>
+</html> 

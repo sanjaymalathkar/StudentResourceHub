@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Records</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 24px;
+        }
+        
+        .nav-links a {
+            margin-left: 15px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+        
+        .flash-message {
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        
+        .flash-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .flash-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .flash-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+        
+        .files-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .files-table th,
+        .files-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .files-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .files-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .download-btn:hover {
+            background-color: #218838;
+        }
+        
+        .no-files {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6c757d;
+            font-style: italic;
+        }
+        
+        .attendance-links {
+            display: flex;
+            margin-top: 20px;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .attendance-link {
+            display: block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .attendance-link:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Attendance Records</h1>
+            <div class="nav-links">
+                <a href="{{ url_for('teacher_dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('take_attendance') }}">Take Attendance</a>
+            </div>
+        </header>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        {% if attendance_files %}
+            <table class="files-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>File Name</th>
+                        <th>Size</th>
+                        <th>Last Modified</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for file in attendance_files %}
+                        <tr>
+                            <td>{{ file.date }}</td>
+                            <td>{{ file.filename }}</td>
+                            <td>{{ file.size }}</td>
+                            <td>{{ file.modified }}</td>
+                            <td>
+                                <a href="{{ url_for('download_attendance', filename=file.filename) }}" class="download-btn">
+                                    Download
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="no-files">
+                <p>No attendance records found. Take attendance to generate Excel reports.</p>
+            </div>
+        {% endif %}
+        
+        <div class="attendance-links">
+            <a href="{{ url_for('take_attendance') }}" class="attendance-link">Take New Attendance</a>
+        </div>
+    </div>
+</body>
+</html> 
